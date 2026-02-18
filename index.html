@@ -1,0 +1,975 @@
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ficha de Treino • Elias Galliano</title>
+  
+  <!-- Fonte moderna e ícones -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  
+  <style>
+    /* Reset e variáveis modernas */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --surface: rgba(255, 255, 255, 0.1);
+      --surface-hover: rgba(255, 255, 255, 0.15);
+      --text-primary: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.7);
+      --accent: #ffd700;
+      --accent-gradient: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --blur: blur(10px);
+      --border: 1px solid rgba(255, 255, 255, 0.18);
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: linear-gradient(145deg, #1a1b3b 0%, #2a1b3c 100%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Glassmorphism moderno */
+    .glass {
+      background: var(--surface);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    /* Header com glass effect */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(26, 27, 59, 0.8);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border-bottom: var(--border);
+    }
+
+    .header-content {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 48px;
+      height: 48px;
+      background: var(--accent-gradient);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 1.5rem;
+      color: #1a1b3b;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    .brand-text h1 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+      background: linear-gradient(to right, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .brand-text p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      background: var(--surface);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      border: var(--border);
+    }
+
+    .badge i {
+      color: var(--accent);
+    }
+
+    /* Container principal */
+    .container {
+      max-width: 1280px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+      }
+      
+      .brand-text p {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      
+      .container {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+      }
+    }
+
+    /* Cards modernos */
+    .card {
+      background: var(--surface);
+      backdrop-filter: var(--blur);
+      -webkit-backdrop-filter: var(--blur);
+      border: var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      background: var(--surface-hover);
+      transform: translateY(-2px);
+    }
+
+    .card-header {
+      padding: 1.5rem;
+      border-bottom: var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .card-header h2 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .card-header h2 i {
+      color: var(--accent);
+    }
+
+    .card-content {
+      padding: 1.5rem;
+    }
+
+    /* Tabs modernas */
+    .tabs {
+      display: flex;
+      gap: 0.5rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.5rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .tab {
+      flex: 1;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .tab.active {
+      background: var(--accent-gradient);
+      color: #1a1b3b;
+      box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Busca moderna */
+    .search-container {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.75rem 1.25rem;
+      border-radius: 100px;
+      border: var(--border);
+      min-width: 280px;
+    }
+
+    .search-box i {
+      color: var(--text-secondary);
+      font-size: 1rem;
+    }
+
+    .search-box input {
+      flex: 1;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      font-size: 1rem;
+      outline: none;
+    }
+
+    .search-box input::placeholder {
+      color: var(--text-secondary);
+    }
+
+    .search-hint {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--text-secondary);
+      font-size: 0.85rem;
+    }
+
+    .kbd {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.25rem 0.5rem;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      border: var(--border);
+    }
+
+    /* Lista de exercícios */
+    .exercise-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .exercise-item {
+      background: rgba(0, 0, 0, 0.2);
+      border: var(--border);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .exercise-item:hover {
+      transform: translateX(4px);
+      border-color: var(--accent);
+    }
+
+    .exercise-header {
+      width: 100%;
+      padding: 1.25rem;
+      background: transparent;
+      border: none;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .exercise-info {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      flex: 1;
+    }
+
+    .exercise-number {
+      width: 40px;
+      height: 40px;
+      background: var(--surface);
+      border-radius: var(--radius-sm);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: var(--accent);
+      border: var(--border);
+    }
+
+    .exercise-details {
+      text-align: left;
+    }
+
+    .exercise-name {
+      font-weight: 600;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .exercise-meta {
+      display: flex;
+      gap: 1.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .exercise-meta span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .exercise-meta i {
+      color: var(--accent);
+      font-size: 0.85rem;
+    }
+
+    .chevron {
+      width: 36px;
+      height: 36px;
+      background: var(--surface);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      color: var(--accent);
+    }
+
+    .exercise-item.open .chevron {
+      transform: rotate(180deg);
+      background: var(--accent-gradient);
+      color: #1a1b3b;
+    }
+
+    /* Painel de detalhes */
+    .exercise-panel {
+      display: none;
+      padding: 1.5rem;
+      border-top: var(--border);
+      background: rgba(0, 0, 0, 0.1);
+    }
+
+    .exercise-item.open .exercise-panel {
+      display: block;
+    }
+
+    .media-container {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+      border: var(--border);
+      aspect-ratio: 16/9;
+      background: rgba(0, 0, 0, 0.2);
+      position: relative;
+    }
+
+    .media-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .media-container img:hover {
+      transform: scale(1.02);
+    }
+
+    .media-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: var(--transition);
+    }
+
+    .media-container:hover .media-overlay {
+      opacity: 1;
+    }
+
+    .play-icon {
+      width: 60px;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(5px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      flex: 1;
+      min-width: 200px;
+      padding: 0.875rem 1.5rem;
+      border-radius: 100px;
+      border: none;
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: var(--transition);
+      text-decoration: none;
+      background: var(--surface);
+      color: var(--text-primary);
+      border: var(--border);
+    }
+
+    .btn-primary {
+      background: var(--accent-gradient);
+      color: #1a1b3b;
+    }
+
+    .btn-primary:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-instagram {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737);
+      color: white;
+    }
+
+    .btn-tiktok {
+      background: linear-gradient(135deg, #000000, #25f4ee, #fe2c55);
+      color: white;
+    }
+
+    /* Empty state */
+    .empty-state {
+      text-align: center;
+      padding: 3rem;
+      background: rgba(0, 0, 0, 0.2);
+      border-radius: var(--radius-md);
+      border: var(--border);
+    }
+
+    .empty-state i {
+      font-size: 3rem;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .empty-state p {
+      color: var(--text-secondary);
+    }
+
+    /* Footer */
+    footer {
+      max-width: 1280px;
+      margin: 2rem auto;
+      padding: 2rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      border-top: var(--border);
+    }
+
+    /* Thumbnails personalizadas */
+    .thumbnail-instagram {
+      background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+
+    .thumbnail-tiktok {
+      background: linear-gradient(135deg, #000000, #25f4ee, #fe2c55);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      position: relative;
+    }
+
+    .thumbnail-icon {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+    }
+
+    .thumbnail-text {
+      font-size: 1rem;
+      font-weight: 500;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      backdrop-filter: blur(5px);
+    }
+
+    /* Loading skeleton */
+    .skeleton {
+      animation: skeleton-loading 1s linear infinite alternate;
+    }
+
+    @keyframes skeleton-loading {
+      0% {
+        background-color: rgba(255, 255, 255, 0.05);
+      }
+      100% {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="brand">
+        <div class="logo">EG</div>
+        <div class="brand-text">
+          <h1>Ficha de Treino</h1>
+          <p>
+            <span><i class="fas fa-bullseye" style="color: var(--accent);"></i> Fortalecimento</span>
+            <span><i class="fas fa-user" style="color: var(--accent);"></i> Larissa</span>
+            <span><i class="fas fa-calendar" style="color: var(--accent);"></i> Início: 11/02/2026</span>
+            <span><i class="fas fa-calendar-check" style="color: var(--accent);"></i> Reavaliação: 11/05/2026</span>
+          </p>
+        </div>
+      </div>
+      <div class="badge">
+        <i class="fas fa-video"></i>
+        <span>Vídeos via YouTube, Instagram e TikTok</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <main>
+      <div class="card">
+        <div class="card-header">
+          <h2><i class="fas fa-dumbbell"></i> Programas de Treino</h2>
+          <span class="badge">Busca <span class="kbd">/</span></span>
+        </div>
+        
+        <div class="card-content">
+          <div class="tabs">
+            <button class="tab active" id="tabA">Programa A</button>
+            <button class="tab" id="tabB">Programa B</button>
+          </div>
+
+          <div class="search-container">
+            <div class="search-box">
+              <i class="fas fa-search"></i>
+              <input id="q" type="search" placeholder="Buscar exercício..." />
+              <span class="search-hint">
+                <span class="kbd">⌘</span>
+                <span class="kbd">F</span>
+              </span>
+            </div>
+          </div>
+
+          <div id="list" class="exercise-list"></div>
+        </div>
+      </div>
+    </main>
+
+    <aside>
+      <div class="card">
+        <div class="card-header">
+          <h2><i class="fas fa-info-circle"></i> Informações</h2>
+          <span class="badge"><i class="fas fa-check-circle" style="color: #22c55e;"></i> completo</span>
+        </div>
+        <div class="card-content">
+          <p style="color: var(--text-secondary); line-height: 1.6;">
+            <i class="fas fa-video" style="color: var(--accent); margin-right: 0.5rem;"></i>
+            Todos os exercícios possuem vídeos demonstrativos em português no YouTube, Instagram ou TikTok.
+            Clique em cada exercício para ver detalhes e acesso ao vídeo.
+          </p>
+        </div>
+      </div>
+    </aside>
+  </div>
+
+  <footer>
+    <i class="fas fa-mobile-alt" style="margin-right: 0.5rem; color: var(--accent);"></i>
+    Total: 22 exercícios com vídeos demonstrativos
+  </footer>
+
+  <script>
+    const tabA = document.getElementById("tabA");
+    const tabB = document.getElementById("tabB");
+    const list = document.getElementById("list");
+    const q = document.getElementById("q");
+
+    let current = "A";
+
+    // Shortcut para busca
+    window.addEventListener("keydown", (e) => {
+      if (e.key === "/" && document.activeElement !== q) {
+        e.preventDefault();
+        q.focus();
+      }
+      
+      if ((e.metaKey || e.ctrlKey) && e.key === "f") {
+        e.preventDefault();
+        q.focus();
+      }
+    });
+
+    // Fallback SVG para YouTube
+    function fallbackSvg(title) {
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+          <defs>
+            <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.8" />
+              <stop offset="100%" style="stop-color:#764ba2;stop-opacity:0.8" />
+            </linearGradient>
+          </defs>
+          <rect width="1280" height="720" fill="url(#grad)"/>
+          <rect x="40" y="40" width="1200" height="640" rx="32" fill="rgba(255,255,255,0.1)" stroke="rgba(255,255,255,0.2)" stroke-width="2"/>
+          <text x="120" y="360" font-family="Inter, system-ui, sans-serif" font-size="48" font-weight="600" fill="white">
+            ${title.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')}
+          </text>
+          <text x="120" y="440" font-family="Inter, system-ui, sans-serif" font-size="24" fill="rgba(255,255,255,0.7)">
+            Vídeo disponível
+          </text>
+        </svg>
+      `)}`;
+    }
+
+    // Função para criar thumbnail do Instagram
+    function createInstagramThumbnail(exerciseName) {
+      const div = document.createElement('div');
+      div.className = 'media-container thumbnail-instagram';
+      div.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+          <i class="fab fa-instagram thumbnail-icon"></i>
+          <span class="thumbnail-text">${exerciseName}</span>
+          <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+            <i class="fas fa-play"></i> Ver no Instagram
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    // Função para criar thumbnail do TikTok
+    function createTikTokThumbnail(exerciseName) {
+      const div = document.createElement('div');
+      div.className = 'media-container thumbnail-tiktok';
+      div.innerHTML = `
+        <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
+          <i class="fab fa-tiktok thumbnail-icon"></i>
+          <span class="thumbnail-text">${exerciseName}</span>
+          <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+            <i class="fas fa-play"></i> Ver no TikTok
+          </div>
+        </div>
+      `;
+      return div;
+    }
+
+    // Dados dos exercícios com TODOS os links fornecidos
+    const DATA = {
+      A: {
+        items: [
+          // MOBILIDADE E ALONGAMENTO PROGRAMA A
+          { 
+            n:"AQ1", 
+            name:"Mobilidade de Ombro", 
+            sets:"1", 
+            reps:"15", 
+            load:"-", 
+            videoUrl: "https://www.youtube.com/watch?v=TPXZUEr6QVU",
+            tipo: "youtube"
+          },
+          { 
+            n:"AQ2", 
+            name:"Mobilidade do Manguito Rotador", 
+            sets:"1", 
+            reps:"15", 
+            load:"-", 
+            videoUrl: "https://www.youtube.com/watch?v=4XiTDeXQy4g",
+            tipo: "youtube"
+          },
+          { 
+            n:"AQ3", 
+            name:"Alongamento de Peitoral na Parede", 
+            sets:"1", 
+            reps:'15" / 15"', 
+            load:"-", 
+            videoUrl: "https://youtube.com/shorts/FwvrxUNwyIY",
+            tipo: "youtube"
+          },
+          // FORÇA PROGRAMA A
+          { n:1, name:"Supino Reto (alternado + junto)", sets:"3", reps:"6", load:"14kg", videoUrl:"https://www.youtube.com/watch?v=31j_Io3ncRg", tipo:"youtube" },
+          { n:2, name:"Voador Frontal na Máquina (junto + alternado)", sets:"3", reps:"6", load:"6PL", videoUrl:"https://www.youtube.com/watch?v=-SO_MVV-eUE", tipo:"youtube" },
+          { n:3, name:"Supino Inclinado com Halteres", sets:"3", reps:"6", load:"15kg", videoUrl:"https://www.youtube.com/watch?v=RGeSgQmO1EU", tipo:"youtube" },
+          { n:4, name:"Crucifixo Inclinado com Halteres", sets:"3", reps:"12", load:"6kg", videoUrl:"https://www.youtube.com/watch?v=oQARSPqhvs8", tipo:"youtube" },
+          { n:5, name:"Elevação Frontal com Halteres", sets:"3", reps:"6", load:"6kg", videoUrl:"https://www.youtube.com/watch?v=jhxLYSm_P-k", tipo:"youtube" },
+          { n:6, name:"Desenvolvimento Arnold", sets:"3", reps:"10", load:"6kg", videoUrl:"https://www.youtube.com/watch?v=IIdj90AJArU", tipo:"youtube" },
+          { n:7, name:"Tríceps Cruzado no Cross (cabos cruzados)", sets:"3", reps:"10", load:"2PL", videoUrl:"https://www.youtube.com/watch?v=2vYMlIZtVC0", tipo:"youtube" },
+          { n:8, name:"Tríceps na Corda (polia alta)", sets:"3", reps:"10", load:"5PL", videoUrl:"https://www.youtube.com/watch?v=KhK5HWJfsrQ", tipo:"youtube" }
+        ]
+      },
+      B: {
+        items: [
+          // MOBILIDADE E ALONGAMENTO PROGRAMA B
+          { 
+            n:"AQ1", 
+            name:"Alongamento de Quadríceps", 
+            sets:"1", 
+            reps:'15"', 
+            load:"-", 
+            videoUrl: "https://youtu.be/yFvf_tdVook",
+            tipo: "youtube"
+          },
+          { 
+            n:"AQ2", 
+            name:"Alongamento de Posterior de Coxa", 
+            sets:"1", 
+            reps:'10 + 15"', 
+            load:"-", 
+            videoUrl: "https://www.instagram.com/reels/DLnth66xXqF/",
+            tipo: "instagram"
+          },
+          { 
+            n:"AQ3", 
+            name:"Mobilidade de Tornozelo na Caixa", 
+            sets:"2", 
+            reps:"15", 
+            load:"-", 
+            videoUrl: "https://youtu.be/b1rVunzAzgE",
+            tipo: "youtube"
+          },
+          // FORÇA PROGRAMA B
+          { n:1, name:"Agachamento Sumô", sets:"3", reps:"10 + 10", load:"22 + 20", videoUrl:"https://www.youtube.com/watch?v=ED9NUglcBrs", tipo:"youtube" },
+          { n:2, name:"Leg Press 180° Unilateral", sets:"3", reps:"12", load:"3PL", videoUrl:"https://www.youtube.com/watch?v=P6s-glQbJPE", tipo:"youtube" },
+          { n:3, name:"Mesa Flexora", sets:"3", reps:"10 + 10", load:"7 + 6", videoUrl:"https://www.youtube.com/watch?v=sWSm1pWb3lw", tipo:"youtube" },
+          { n:4, name:"Cadeira Extensora", sets:"3", reps:'10" + 10 + 10', load:"7PL", videoUrl:"https://www.youtube.com/watch?v=el3oHblB5DM", tipo:"youtube" },
+          { n:5, name:"Agachamento no Cross (10 completos + 10 a 90°)", sets:"3", reps:"10 completos + 10 (90º)", load:"8PL", videoUrl:"https://www.youtube.com/watch?v=1KxwdW6mF4Q", tipo:"youtube" },
+          { n:6, name:"Cadeira Abdutora", sets:"3", reps:"20", load:"11PL", videoUrl:"https://www.youtube.com/watch?v=ShaxBtZoXFg", tipo:"youtube" },
+          { n:7, name:"Cadeira Adutora", sets:"3", reps:"20", load:"11PL", videoUrl:"https://www.youtube.com/watch?v=8ITuDovX6Zw", tipo:"youtube" },
+          { 
+            n:8, 
+            name:"Polia Média (Core / Coletor)", 
+            sets:"3", 
+            reps:'10" + 10 + 10', 
+            load:"3PL", 
+            videoUrl: "https://www.tiktok.com/@amorimpro/video/7462927939475197189",
+            tipo: "tiktok"
+          },
+          { n:9, name:"Prancha Lateral no Banco", sets:"3", reps:'10 a 15"', load:"-", videoUrl:"https://www.youtube.com/watch?v=RPr51FgCYbA", tipo:"youtube" }
+        ]
+      }
+    };
+
+    function render() {
+      const query = (q.value || "").trim().toLowerCase();
+      list.innerHTML = "";
+
+      const items = DATA[current].items.filter(it => 
+        !query || it.name.toLowerCase().includes(query)
+      );
+
+      items.forEach((it) => {
+        const item = document.createElement("div");
+        item.className = "exercise-item";
+
+        const header = document.createElement("button");
+        header.className = "exercise-header";
+
+        header.innerHTML = `
+          <div class="exercise-info">
+            <div class="exercise-number">${it.n}</div>
+            <div class="exercise-details">
+              <div class="exercise-name">${it.name}</div>
+              <div class="exercise-meta">
+                <span><i class="fas fa-layer-group"></i> ${it.sets} séries</span>
+                <span><i class="fas fa-repeat"></i> ${it.reps} reps</span>
+                <span><i class="fas fa-weight-hanging"></i> ${it.load}</span>
+              </div>
+            </div>
+          </div>
+          <div class="chevron">
+            <i class="fas fa-chevron-down"></i>
+          </div>
+        `;
+
+        const panel = document.createElement("div");
+        panel.className = "exercise-panel";
+
+        let mediaHtml = '';
+        let buttonHtml = '';
+
+        if (it.tipo === 'youtube') {
+          // Extrair ID do YouTube da URL
+          let videoId = '';
+          if (it.videoUrl.includes('youtu.be')) {
+            videoId = it.videoUrl.split('youtu.be/')[1].split('?')[0];
+          } else if (it.videoUrl.includes('shorts')) {
+            videoId = it.videoUrl.split('shorts/')[1].split('?')[0];
+          } else {
+            const match = it.videoUrl.match(/[?&]v=([^&]+)/);
+            videoId = match ? match[1] : '';
+          }
+          
+          const thumbUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : '';
+          
+          mediaHtml = `
+            <div class="media-container">
+              <img 
+                src="${thumbUrl || fallbackSvg(it.name)}" 
+                alt="${it.name}"
+                loading="lazy"
+                onerror="this.src='${fallbackSvg(it.name)}'"
+              />
+            </div>
+          `;
+          buttonHtml = `
+            <a href="${it.videoUrl}" class="btn btn-primary" target="_blank" rel="noopener">
+              <i class="fab fa-youtube"></i> Assistir no YouTube
+            </a>
+          `;
+        } else if (it.tipo === 'instagram') {
+          mediaHtml = `
+            <div class="media-container" style="background: linear-gradient(135deg, #833ab4, #fd1d1d, #f77737); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <i class="fab fa-instagram" style="font-size: 4rem; color: white; margin-bottom: 1rem;"></i>
+              <span style="background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 100px; backdrop-filter: blur(5px);">${it.name}</span>
+              <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+                <i class="fas fa-play"></i> Ver no Instagram
+              </div>
+            </div>
+          `;
+          buttonHtml = `
+            <a href="${it.videoUrl}" class="btn btn-instagram" target="_blank" rel="noopener">
+              <i class="fab fa-instagram"></i> Ver no Instagram
+            </a>
+          `;
+        } else if (it.tipo === 'tiktok') {
+          mediaHtml = `
+            <div class="media-container" style="background: linear-gradient(135deg, #000000, #25f4ee, #fe2c55); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+              <i class="fab fa-tiktok" style="font-size: 4rem; color: white; margin-bottom: 1rem;"></i>
+              <span style="background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 100px; backdrop-filter: blur(5px);">${it.name}</span>
+              <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+                <i class="fas fa-play"></i> Ver no TikTok
+              </div>
+            </div>
+          `;
+          buttonHtml = `
+            <a href="${it.videoUrl}" class="btn-tiktok btn" target="_blank" rel="noopener">
+              <i class="fab fa-tiktok"></i> Ver no TikTok
+            </a>
+          `;
+        }
+
+        panel.innerHTML = mediaHtml + `
+          <div class="action-buttons" style="margin-top: 1rem;">
+            ${buttonHtml}
+          </div>
+        `;
+
+        header.addEventListener("click", (e) => {
+          e.preventDefault();
+          const isOpen = item.classList.contains("open");
+          
+          document.querySelectorAll(".exercise-item.open").forEach(el => {
+            if (el !== item) el.classList.remove("open");
+          });
+          
+          item.classList.toggle("open", !isOpen);
+        });
+
+        item.appendChild(header);
+        item.appendChild(panel);
+        list.appendChild(item);
+      });
+
+      if (items.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "empty-state";
+        empty.innerHTML = `
+          <i class="fas fa-search"></i>
+          <p>Nenhum exercício encontrado para <strong>"${query}"</strong></p>
+        `;
+        list.appendChild(empty);
+      }
+    }
+
+    function setTab(which) {
+      current = which;
+      tabA.classList.toggle("active", which === "A");
+      tabB.classList.toggle("active", which === "B");
+      q.value = "";
+      render();
+    }
+
+    tabA.addEventListener("click", () => setTab("A"));
+    tabB.addEventListener("click", () => setTab("B"));
+    q.addEventListener("input", render);
+
+    let timeout;
+    q.addEventListener("input", (e) => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => render(), 300);
+    });
+
+    render();
+  </script>
+</body>
+</html>
