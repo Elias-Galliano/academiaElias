@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -24,6 +25,8 @@
       --text-secondary: rgba(255, 255, 255, 0.7);
       --accent: #ffd700;
       --accent-gradient: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
+      --success: #10b981;
+      --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       --blur: blur(10px);
       --border: 1px solid rgba(255, 255, 255, 0.18);
@@ -194,6 +197,37 @@
       padding: 1.5rem;
     }
 
+    /* Progress bar */
+    .progress-container {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 100px;
+      height: 8px;
+      width: 100%;
+      margin-bottom: 1.5rem;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background: var(--success-gradient);
+      border-radius: 100px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    .progress-text span:last-child {
+      color: var(--accent);
+      font-weight: 600;
+    }
+
     /* Tabs modernas */
     .tabs {
       display: flex;
@@ -292,9 +326,19 @@
       transition: var(--transition);
     }
 
-    .exercise-item:hover {
-      transform: translateX(4px);
-      border-color: var(--accent);
+    .exercise-item.completed {
+      border-color: var(--success);
+      background: rgba(16, 185, 129, 0.1);
+    }
+
+    .exercise-item.completed .exercise-number {
+      background: var(--success-gradient);
+      color: white;
+    }
+
+    .exercise-item.completed .exercise-name {
+      text-decoration: line-through;
+      opacity: 0.8;
     }
 
     .exercise-header {
@@ -330,6 +374,7 @@
       font-size: 1.1rem;
       color: var(--accent);
       border: var(--border);
+      transition: var(--transition);
     }
 
     .exercise-details {
@@ -340,6 +385,7 @@
       font-weight: 600;
       font-size: 1.1rem;
       margin-bottom: 0.25rem;
+      transition: var(--transition);
     }
 
     .exercise-meta {
@@ -358,6 +404,38 @@
     .exercise-meta i {
       color: var(--accent);
       font-size: 0.85rem;
+    }
+
+    .exercise-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .btn-complete {
+      background: var(--surface);
+      border: var(--border);
+      color: var(--text-secondary);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 1.1rem;
+    }
+
+    .btn-complete:hover {
+      background: var(--success-gradient);
+      color: white;
+      transform: scale(1.1);
+    }
+
+    .btn-complete.completed {
+      background: var(--success-gradient);
+      color: white;
     }
 
     .chevron {
@@ -605,10 +683,18 @@
         </div>
         
         <div class="card-content">
+          <div class="progress-text">
+            <span><i class="fas fa-check-circle" style="color: var(--success);"></i> Progresso do dia</span>
+            <span id="progress-count">0/0 concluídos</span>
+          </div>
+          <div class="progress-container">
+            <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
+          </div>
+
           <div class="tabs">
-            <button class="tab active" id="tabA">Programa A</button>
-            <button class="tab" id="tabB">Programa B</button>
-            <button class="tab" id="tabC">Programa C - Sexta feira (Costas)</button>
+            <button class="tab active" id="tabA">SEGUNDA-FEIRA - PEITO</button>
+            <button class="tab" id="tabB">QUARTA-FEIRA - PERNAS</button>
+            <button class="tab" id="tabC">SEXTA-FEIRA - COSTAS</button>
           </div>
 
           <div class="search-container">
@@ -639,6 +725,10 @@
             Todos os exercícios possuem vídeos demonstrativos em português no YouTube, Instagram ou TikTok.
             Clique em cada exercício para ver detalhes e acesso ao vídeo.
           </p>
+          <p style="color: var(--text-secondary); line-height: 1.6; margin-top: 1rem;">
+            <i class="fas fa-check-circle" style="color: var(--success); margin-right: 0.5rem;"></i>
+            Marque os exercícios como concluídos conforme for completando seu treino do dia.
+          </p>
         </div>
       </div>
     </aside>
@@ -655,8 +745,13 @@
     const tabC = document.getElementById("tabC");
     const list = document.getElementById("list");
     const q = document.getElementById("q");
+    const progressCount = document.getElementById("progress-count");
+    const progressBar = document.getElementById("progress-bar");
 
     let current = "A";
+    
+    // Estado dos exercícios concluídos (salvo no localStorage)
+    let completedExercises = JSON.parse(localStorage.getItem('completedExercises')) || {};
 
     // Shortcut para busca
     window.addEventListener("keydown", (e) => {
@@ -741,6 +836,64 @@
       
       const match = url.match(/[?&]v=([^&]+)/);
       return match ? match[1] : null;
+    }
+
+    // Função para gerar chave única do exercício
+    function getExerciseKey(program, exercise) {
+      return `${program}-${exercise.n}-${exercise.name}`;
+    }
+
+    // Função para alternar estado de conclusão
+    function toggleComplete(program, exercise, button) {
+      const key = getExerciseKey(program, exercise);
+      
+      if (completedExercises[key]) {
+        delete completedExercises[key];
+      } else {
+        completedExercises[key] = true;
+      }
+      
+      // Salvar no localStorage
+      localStorage.setItem('completedExercises', JSON.stringify(completedExercises));
+      
+      // Atualizar aparência do botão
+      if (completedExercises[key]) {
+        button.classList.add('completed');
+        button.innerHTML = '<i class="fas fa-check"></i>';
+      } else {
+        button.classList.remove('completed');
+        button.innerHTML = '<i class="fas fa-circle"></i>';
+      }
+      
+      // Atualizar classe do item
+      const exerciseItem = button.closest('.exercise-item');
+      if (completedExercises[key]) {
+        exerciseItem.classList.add('completed');
+      } else {
+        exerciseItem.classList.remove('completed');
+      }
+      
+      // Atualizar progresso
+      updateProgress();
+    }
+
+    // Função para atualizar barra de progresso
+    function updateProgress() {
+      const currentItems = DATA[current].items;
+      const total = currentItems.length;
+      
+      let completed = 0;
+      currentItems.forEach(item => {
+        const key = getExerciseKey(current, item);
+        if (completedExercises[key]) {
+          completed++;
+        }
+      });
+      
+      const percentage = total > 0 ? (completed / total) * 100 : 0;
+      
+      progressCount.textContent = `${completed}/${total} concluídos`;
+      progressBar.style.width = `${percentage}%`;
     }
 
     // Dados dos exercícios com TODOS os links fornecidos
@@ -962,6 +1115,11 @@
       items.forEach((it) => {
         const item = document.createElement("div");
         item.className = "exercise-item";
+        
+        const key = getExerciseKey(current, it);
+        if (completedExercises[key]) {
+          item.classList.add('completed');
+        }
 
         const header = document.createElement("button");
         header.className = "exercise-header";
@@ -981,8 +1139,13 @@
               </div>
             </div>
           </div>
-          <div class="chevron">
-            <i class="fas fa-chevron-down"></i>
+          <div class="exercise-actions">
+            <div class="btn-complete ${completedExercises[key] ? 'completed' : ''}" title="Marcar como concluído">
+              ${completedExercises[key] ? '<i class="fas fa-check"></i>' : '<i class="fas fa-circle"></i>'}
+            </div>
+            <div class="chevron">
+              <i class="fas fa-chevron-down"></i>
+            </div>
           </div>
         `;
 
@@ -1062,6 +1225,13 @@
           </div>
         `;
 
+        // Event listener para o botão de concluir
+        const completeBtn = header.querySelector('.btn-complete');
+        completeBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleComplete(current, it, completeBtn);
+        });
+
         header.addEventListener("click", (e) => {
           e.preventDefault();
           const isOpen = item.classList.contains("open");
@@ -1087,6 +1257,8 @@
         `;
         list.appendChild(empty);
       }
+      
+      updateProgress();
     }
 
     function setTab(which) {
