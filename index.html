@@ -1,4 +1,3 @@
-
 <!doctype html>
 <html lang="pt-BR">
 <head>
@@ -609,6 +608,7 @@
           <div class="tabs">
             <button class="tab active" id="tabA">Programa A</button>
             <button class="tab" id="tabB">Programa B</button>
+            <button class="tab" id="tabC">Programa C - Sexta feira (Costas)</button>
           </div>
 
           <div class="search-container">
@@ -646,12 +646,13 @@
 
   <footer>
     <i class="fas fa-mobile-alt" style="margin-right: 0.5rem; color: var(--accent);"></i>
-    Total: 22 exercícios com vídeos demonstrativos
+    Total: 31 exercícios com vídeos demonstrativos
   </footer>
 
   <script>
     const tabA = document.getElementById("tabA");
     const tabB = document.getElementById("tabB");
+    const tabC = document.getElementById("tabC");
     const list = document.getElementById("list");
     const q = document.getElementById("q");
 
@@ -722,6 +723,24 @@
         </div>
       `;
       return div;
+    }
+
+    // Função para extrair ID do YouTube
+    function getYoutubeId(url) {
+      if (!url) return null;
+      
+      if (url.includes('youtube.com/shorts/')) {
+        const match = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/);
+        return match ? match[1] : null;
+      }
+      
+      if (url.includes('youtu.be/')) {
+        const match = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
+        return match ? match[1] : null;
+      }
+      
+      const match = url.match(/[?&]v=([^&]+)/);
+      return match ? match[1] : null;
     }
 
     // Dados dos exercícios com TODOS os links fornecidos
@@ -816,6 +835,119 @@
           },
           { n:9, name:"Prancha Lateral no Banco", sets:"3", reps:'10 a 15"', load:"-", videoUrl:"https://www.youtube.com/watch?v=RPr51FgCYbA", tipo:"youtube" }
         ]
+      },
+      C: {
+        items: [
+          // ALONGAMENTOS (Aquecimento) PROGRAMA C - SEXTA FEIRA
+          { 
+            n:"AQ1", 
+            name:"Alongamento Dorsal", 
+            sets:"1", 
+            reps:'15"', 
+            load:"-", 
+            videoUrl: "https://youtube.com/shorts/DXW-fCGMGx0?si=tyO91UGOBUCeZ8HN",
+            tipo: "youtube"
+          },
+          { 
+            n:"AQ2", 
+            name:"Alongamento de Tríceps", 
+            sets:"1", 
+            reps:'15"', 
+            load:"-", 
+            videoUrl: "https://youtube.com/shorts/0JdE_6M7ZJ4?si=PJYPBDMB-VM5qFx5",
+            tipo: "youtube"
+          },
+          { 
+            n:"AQ3", 
+            name:"Alongamento de Peitoral", 
+            sets:"1", 
+            reps:'15"', 
+            load:"-", 
+            videoUrl: "https://youtube.com/shorts/FwvrxUNwyIY?si=yxPdMBsR5_OkWmr8",
+            tipo: "youtube"
+          },
+          // TREINO PRINCIPAL - COSTAS
+          { 
+            n:1, 
+            name:"Remada baixa (unilateral)", 
+            sets:"3", 
+            reps:"10", 
+            load:"4 PL", 
+            observacao:"✓",
+            videoUrl: "https://youtube.com/shorts/LpQMEygJfNY?si=96cYwlAe0bXGjNSi",
+            tipo: "youtube"
+          },
+          { 
+            n:2, 
+            name:"Remada baixa (pegada triângulo)", 
+            sets:"3", 
+            reps:'10 c/ 15"', 
+            load:"7 PL", 
+            observacao:"",
+            videoUrl: "https://youtube.com/shorts/C9N2sCdAWJ8?si=S0XIKLF4NDN0Zwmv",
+            tipo: "youtube"
+          },
+          { 
+            n:3, 
+            name:"Pulley supinado", 
+            sets:"3", 
+            reps:"10", 
+            load:"7 PL", 
+            observacao:"",
+            videoUrl: "https://youtube.com/shorts/E-ftSvmzRME?si=-AiZdv3GEQ3VFkoR",
+            tipo: "youtube"
+          },
+          { 
+            n:4, 
+            name:"Remada alta / Barra", 
+            sets:"3", 
+            reps:"10", 
+            load:"18 kg", 
+            observacao:"",
+            videoUrl: "https://youtube.com/shorts/emPow6X_a_E?si=WbFnjxo9TRaUDdal",
+            tipo: "youtube"
+          },
+          { 
+            n:5, 
+            name:"Bíceps com Desenvolvimento", 
+            sets:"3", 
+            reps:"10", 
+            load:"18 kg", 
+            observacao:"Barra pronta",
+            videoUrl: "https://youtube.com/shorts/Jjhwt8IWM8I?si=4VNf4XWoZwvbCMIy",
+            tipo: "youtube"
+          },
+          { 
+            n:6, 
+            name:"Elevação lateral (sentado)", 
+            sets:"3", 
+            reps:"10 + 10", 
+            load:"5 + 4 kg", 
+            observacao:"",
+            videoUrl: "https://youtube.com/shorts/YbqbspnFnfo?si=ga5RwgSvdbnI81Iv",
+            tipo: "youtube"
+          },
+          { 
+            n:7, 
+            name:"Encolhimento", 
+            sets:"3", 
+            reps:"15", 
+            load:"18 kg", 
+            observacao:"",
+            videoUrl: "https://youtube.com/shorts/x5CtfXC5h9c?si=lyeUPgY_fPzmFGYh",
+            tipo: "youtube"
+          },
+          { 
+            n:8, 
+            name:"Martelo B. inclinado", 
+            sets:"3", 
+            reps:"10", 
+            load:"7 kg", 
+            observacao:"",
+            videoUrl: "https://youtube.com/shorts/6GWl-tjj1Bg?si=tuggv2UmQy6pl_sv",
+            tipo: "youtube"
+          }
+        ]
       }
     };
 
@@ -834,11 +966,14 @@
         const header = document.createElement("button");
         header.className = "exercise-header";
 
+        // Formata a observação se existir
+        const observacaoHtml = it.observacao ? ` <span style="color: var(--accent);">(${it.observacao})</span>` : '';
+
         header.innerHTML = `
           <div class="exercise-info">
             <div class="exercise-number">${it.n}</div>
             <div class="exercise-details">
-              <div class="exercise-name">${it.name}</div>
+              <div class="exercise-name">${it.name}${observacaoHtml}</div>
               <div class="exercise-meta">
                 <span><i class="fas fa-layer-group"></i> ${it.sets} séries</span>
                 <span><i class="fas fa-repeat"></i> ${it.reps} reps</span>
@@ -858,29 +993,32 @@
         let buttonHtml = '';
 
         if (it.tipo === 'youtube') {
-          // Extrair ID do YouTube da URL
-          let videoId = '';
-          if (it.videoUrl.includes('youtu.be')) {
-            videoId = it.videoUrl.split('youtu.be/')[1].split('?')[0];
-          } else if (it.videoUrl.includes('shorts')) {
-            videoId = it.videoUrl.split('shorts/')[1].split('?')[0];
-          } else {
-            const match = it.videoUrl.match(/[?&]v=([^&]+)/);
-            videoId = match ? match[1] : '';
-          }
-          
+          const videoId = getYoutubeId(it.videoUrl);
           const thumbUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : '';
           
-          mediaHtml = `
-            <div class="media-container">
-              <img 
-                src="${thumbUrl || fallbackSvg(it.name)}" 
-                alt="${it.name}"
-                loading="lazy"
-                onerror="this.src='${fallbackSvg(it.name)}'"
-              />
-            </div>
-          `;
+          if (thumbUrl) {
+            mediaHtml = `
+              <div class="media-container">
+                <img 
+                  src="${thumbUrl}" 
+                  alt="${it.name}"
+                  loading="lazy"
+                  onerror="this.src='${fallbackSvg(it.name)}'"
+                />
+              </div>
+            `;
+          } else {
+            mediaHtml = `
+              <div class="media-container" style="background: linear-gradient(135deg, #ff0000, #cc0000); display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <i class="fab fa-youtube" style="font-size: 4rem; color: white; margin-bottom: 1rem;"></i>
+                <span style="background: rgba(0,0,0,0.5); padding: 0.5rem 1rem; border-radius: 100px; backdrop-filter: blur(5px);">${it.name}</span>
+                <div style="margin-top: 1rem; font-size: 0.8rem; opacity: 0.8;">
+                  <i class="fas fa-play"></i> Assistir no YouTube
+                </div>
+              </div>
+            `;
+          }
+          
           buttonHtml = `
             <a href="${it.videoUrl}" class="btn btn-primary" target="_blank" rel="noopener">
               <i class="fab fa-youtube"></i> Assistir no YouTube
@@ -955,12 +1093,14 @@
       current = which;
       tabA.classList.toggle("active", which === "A");
       tabB.classList.toggle("active", which === "B");
+      tabC.classList.toggle("active", which === "C");
       q.value = "";
       render();
     }
 
     tabA.addEventListener("click", () => setTab("A"));
     tabB.addEventListener("click", () => setTab("B"));
+    tabC.addEventListener("click", () => setTab("C"));
     q.addEventListener("input", render);
 
     let timeout;
