@@ -2,7 +2,7 @@
 <html lang="pt-BR">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=yes" />
   <title>Ficha de Treino • Elias Galliano ✨</title>
   
   <!-- Fonte moderna e ícones -->
@@ -28,21 +28,23 @@
       --warning: #f59e0b;
       --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
       --danger: #ef4444;
-      --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
       --blur: blur(10px);
       --border: 1px solid rgba(255, 255, 255, 0.18);
-      --radius-lg: 24px;
-      --radius-md: 16px;
-      --radius-sm: 12px;
+      --radius-lg: 20px;
+      --radius-md: 14px;
+      --radius-sm: 10px;
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
     body {
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: linear-gradient(145deg, #1a1b3b 0%, #2a1b3c 100%);
       color: var(--text-primary);
       min-height: 100vh;
-      line-height: 1.6;
+      line-height: 1.5;
+      font-size: 16px;
+      -webkit-font-smoothing: antialiased;
     }
 
     header {
@@ -57,76 +59,90 @@
     .header-content {
       max-width: 1280px;
       margin: 0 auto;
-      padding: 1rem 2rem;
+      padding: 0.75rem 1rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 2rem;
-      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
+      min-width: 0;
+      flex: 1;
     }
 
     .logo {
-      width: 60px;
-      height: 60px;
+      width: 48px;
+      height: 48px;
       border-radius: var(--radius-sm);
       overflow: hidden;
-      padding: 0;
       background: transparent;
+      flex-shrink: 0;
+      border: 2px solid rgba(255,215,0,0.3);
     }
 
     .foto-perfil {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      border-radius: var(--radius-sm);
+      display: block;
+    }
+
+    .brand-text {
+      min-width: 0;
+      flex: 1;
     }
 
     .brand-text h1 {
-      font-size: 1.8rem;
+      font-size: 1.25rem;
       font-weight: 700;
       background: linear-gradient(to right, #fff, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-bottom: 0.25rem;
     }
 
     .student-info {
       display: flex;
       flex-wrap: wrap;
-      gap: 1rem;
-      margin-top: 0.5rem;
+      gap: 0.5rem;
+      margin-top: 0.25rem;
     }
 
     .info-item {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 0.5rem 1rem;
+      gap: 0.35rem;
+      background: rgba(255, 255, 255, 0.15);
+      padding: 0.35rem 0.7rem;
       border-radius: 100px;
-      border: var(--border);
-      font-size: 0.9rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.75rem;
+      backdrop-filter: var(--blur);
+      color: white;
+      font-weight: 500;
     }
 
     .info-item i {
       color: var(--accent);
-      font-size: 1rem;
+      font-size: 0.7rem;
+      opacity: 0.9;
     }
 
     .info-item strong {
       color: white;
-      margin-left: 0.25rem;
-      font-weight: 600;
+      font-weight: 700;
+      margin-left: 0.1rem;
     }
 
     .info-item.warning {
-      background: rgba(245, 158, 11, 0.2);
+      background: rgba(245, 158, 11, 0.3);
       border-color: var(--warning);
       animation: pulse 2s infinite;
     }
@@ -136,7 +152,7 @@
     }
 
     .info-item.danger {
-      background: rgba(239, 68, 68, 0.2);
+      background: rgba(239, 68, 68, 0.3);
       border-color: var(--danger);
       animation: pulse 1s infinite;
     }
@@ -151,41 +167,33 @@
       100% { opacity: 1; }
     }
 
-    .badge {
-      background: var(--surface);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      font-size: 0.85rem;
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border: var(--border);
-    }
-
-    .badge i {
-      color: var(--accent);
-    }
-
     .date-badge {
-      background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-      color: #1a1b3b;
+      background: rgba(0,0,0,0.3);
+      backdrop-filter: var(--blur);
+      color: white;
       font-weight: 600;
+      padding: 0.5rem 0.75rem;
+      border-radius: 100px;
+      font-size: 0.8rem;
+      white-space: nowrap;
+      border: 1px solid rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .date-badge i {
+      color: var(--accent);
+      font-size: 0.75rem;
     }
 
     .container {
       max-width: 1280px;
-      margin: 2rem auto;
-      padding: 0 2rem;
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2rem;
-    }
-
-    @media (max-width: 768px) {
-      .container {
-        grid-template-columns: 1fr;
-        padding: 1rem;
-      }
+      margin: 1rem auto;
+      padding: 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
 
     .card {
@@ -197,21 +205,21 @@
     }
 
     .card-header {
-      padding: 1.5rem;
+      padding: 1rem 1.25rem;
       border-bottom: var(--border);
       display: flex;
       align-items: center;
       justify-content: space-between;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 0.5rem;
     }
 
     .card-header h2 {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
     }
 
     .card-header h2 i {
@@ -219,7 +227,7 @@
     }
 
     .card-content {
-      padding: 1.5rem;
+      padding: 1.25rem;
     }
 
     .progress-text {
@@ -227,7 +235,7 @@
       justify-content: space-between;
       margin-bottom: 0.5rem;
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
 
     .progress-container {
@@ -235,7 +243,7 @@
       border-radius: 100px;
       height: 8px;
       width: 100%;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
       overflow: hidden;
     }
 
@@ -253,19 +261,27 @@
       background: rgba(0, 0, 0, 0.2);
       padding: 0.5rem;
       border-radius: 100px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+    }
+
+    .tabs::-webkit-scrollbar {
+      display: none;
     }
 
     .tab {
       flex: 1;
-      padding: 0.75rem 1.5rem;
+      padding: 0.6rem 0.8rem;
       border: none;
       background: transparent;
       color: var(--text-secondary);
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.8rem;
       border-radius: 100px;
       cursor: pointer;
+      white-space: nowrap;
     }
 
     .tab.active {
@@ -276,16 +292,17 @@
     .search-box {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
       background: rgba(0, 0, 0, 0.2);
-      padding: 0.75rem 1.25rem;
+      padding: 0.6rem 1rem;
       border-radius: 100px;
       border: var(--border);
-      margin-bottom: 2rem;
+      margin-bottom: 1.25rem;
     }
 
     .search-box i {
       color: var(--text-secondary);
+      font-size: 0.9rem;
     }
 
     .search-box input {
@@ -293,7 +310,7 @@
       background: transparent;
       border: none;
       color: var(--text-primary);
-      font-size: 1rem;
+      font-size: 0.95rem;
       outline: none;
     }
 
@@ -304,7 +321,7 @@
     .exercise-list {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
+      gap: 0.75rem;
     }
 
     .exercise-item {
@@ -319,39 +336,30 @@
       background: rgba(16, 185, 129, 0.1);
     }
 
-    .exercise-item.completed .exercise-number {
-      background: var(--success-gradient);
-      color: white;
-    }
-
-    .exercise-item.completed .exercise-name {
-      text-decoration: line-through;
-      opacity: 0.8;
-    }
-
     .exercise-header {
       width: 100%;
-      padding: 1.25rem;
+      padding: 1rem;
       background: transparent;
       border: none;
       color: var(--text-primary);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: 0.75rem;
       cursor: pointer;
     }
 
     .exercise-info {
       display: flex;
       align-items: flex-start;
-      gap: 1rem;
+      gap: 0.75rem;
       flex: 1;
+      min-width: 0;
     }
 
     .exercise-number {
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       background: var(--surface);
       border-radius: var(--radius-sm);
       display: flex;
@@ -360,86 +368,98 @@
       font-weight: 700;
       color: var(--accent);
       border: var(--border);
+      flex-shrink: 0;
+      font-size: 0.9rem;
     }
 
     .exercise-name {
       font-weight: 600;
-      font-size: 1.1rem;
-      margin-bottom: 0.25rem;
+      font-size: 0.95rem;
+      margin-bottom: 0.2rem;
+      word-break: break-word;
     }
 
     .exercise-meta {
       display: flex;
-      gap: 1.5rem;
+      gap: 0.5rem;
       color: var(--text-secondary);
-      font-size: 0.9rem;
+      font-size: 0.8rem;
       flex-wrap: wrap;
     }
 
     .exercise-meta span {
       display: flex;
       align-items: center;
-      gap: 0.5rem;
+      gap: 0.25rem;
+      background: rgba(0, 0, 0, 0.3);
+      padding: 0.2rem 0.5rem;
+      border-radius: 20px;
     }
 
     .exercise-meta i {
       color: var(--accent);
+      font-size: 0.7rem;
     }
 
     .exercise-timestamp {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
       color: var(--success);
-      margin-top: 0.25rem;
+      margin-top: 0.2rem;
       display: flex;
       align-items: center;
-      gap: 0.3rem;
+      gap: 0.2rem;
     }
 
     .exercise-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.5rem;
+      flex-shrink: 0;
     }
 
     .btn-complete {
       background: var(--surface);
       border: var(--border);
       color: var(--text-secondary);
-      width: 40px;
-      height: 40px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
 
     .btn-complete.completed {
       background: var(--success-gradient);
       color: white;
+      border: none;
     }
 
     .chevron {
-      width: 36px;
-      height: 36px;
+      width: 32px;
+      height: 32px;
       background: var(--surface);
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
       color: var(--accent);
+      border: var(--border);
+      transition: var(--transition);
     }
 
     .exercise-item.open .chevron {
       transform: rotate(180deg);
       background: var(--accent-gradient);
       color: #1a1b3b;
+      border: none;
     }
 
     .exercise-panel {
       display: none;
-      padding: 1.5rem;
+      padding: 1rem;
       border-top: var(--border);
       background: rgba(0, 0, 0, 0.1);
     }
@@ -451,11 +471,10 @@
     .media-container {
       border-radius: var(--radius-md);
       overflow: hidden;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1rem;
       border: var(--border);
       aspect-ratio: 16/9;
       background: rgba(0, 0, 0, 0.2);
-      position: relative;
     }
 
     .media-container img {
@@ -464,43 +483,22 @@
       object-fit: cover;
     }
 
-    .thumbnail-fallback {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      background: linear-gradient(135deg, #ff0000, #cc0000);
-    }
-
-    .thumbnail-icon {
-      font-size: 4rem;
-      margin-bottom: 1rem;
-    }
-
-    .thumbnail-text {
-      background: rgba(0,0,0,0.5);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      backdrop-filter: blur(5px);
-    }
-
     .action-buttons {
       display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
+      gap: 0.75rem;
     }
 
     .btn {
       flex: 1;
-      padding: 0.875rem 1.5rem;
+      padding: 0.7rem 1rem;
       border-radius: 100px;
       border: none;
       font-weight: 600;
+      font-size: 0.9rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.75rem;
+      gap: 0.5rem;
       cursor: pointer;
       text-decoration: none;
       background: var(--surface);
@@ -528,22 +526,6 @@
       color: white;
     }
 
-    .btn-clear-history {
-      background: transparent;
-      border: 1px solid var(--accent);
-      color: var(--accent);
-      padding: 0.5rem 1rem;
-      border-radius: 100px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-clear-history:hover {
-      background: var(--accent);
-      color: #1a1b3b;
-    }
-
     .history-filters {
       display: flex;
       gap: 0.5rem;
@@ -557,25 +539,20 @@
       color: var(--text-secondary);
       padding: 0.4rem 0.8rem;
       border-radius: 100px;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .filter-btn:hover {
-      border-color: var(--accent);
-      color: var(--accent);
     }
 
     .filter-btn.active {
       background: var(--accent-gradient);
       color: #1a1b3b;
+      border: none;
     }
 
     .history-item {
-      font-size: 0.85rem;
-      padding: 0.75rem;
-      margin: 0.5rem 0;
+      font-size: 0.8rem;
+      padding: 0.6rem;
+      margin: 0.4rem 0;
       background: rgba(0, 0, 0, 0.3);
       border-radius: var(--radius-sm);
       border-left: 3px solid var(--accent);
@@ -587,81 +564,60 @@
 
     .history-date {
       color: var(--text-secondary);
-      font-size: 0.75rem;
-      display: block;
-      margin-top: 0.3rem;
+      font-size: 0.7rem;
+      margin-top: 0.2rem;
       background: rgba(0, 0, 0, 0.3);
-      padding: 0.2rem 0.5rem;
+      padding: 0.15rem 0.4rem;
       border-radius: 100px;
       display: inline-block;
     }
 
-    .history-timestamp {
-      color: var(--success);
-      font-size: 0.75rem;
-      margin-left: 0.5rem;
-    }
-
-    .stats-card {
-      background: rgba(0, 0, 0, 0.3);
-      border: var(--border);
-      border-radius: var(--radius-md);
-      padding: 1rem;
-      margin-bottom: 1rem;
-      text-align: center;
-    }
-
     .stats-number {
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: 700;
       background: var(--accent-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
+    .alert-banner {
+      background: var(--warning-gradient);
+      color: #1a1b3b;
+      padding: 0.75rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-weight: 600;
+      font-size: 0.85rem;
+      animation: pulse 2s infinite;
+    }
+
     .empty-state {
       text-align: center;
-      padding: 3rem;
+      padding: 2rem;
       background: rgba(0, 0, 0, 0.2);
       border-radius: var(--radius-md);
       border: var(--border);
     }
 
     .empty-state i {
-      font-size: 3rem;
+      font-size: 2rem;
       color: var(--accent);
-      margin-bottom: 1rem;
+      margin-bottom: 0.5rem;
     }
 
     footer {
-      max-width: 1280px;
-      margin: 2rem auto;
-      padding: 2rem;
+      margin: 1.5rem 1rem;
       text-align: center;
       color: var(--text-secondary);
-      border-top: var(--border);
+      font-size: 0.8rem;
     }
 
     footer i {
       color: var(--accent);
-    }
-
-    .alert-banner {
-      background: var(--warning-gradient);
-      color: #1a1b3b;
-      padding: 1rem;
-      border-radius: var(--radius-md);
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-      font-weight: 600;
-      animation: pulse 2s infinite;
-    }
-
-    .alert-banner i {
-      font-size: 1.5rem;
     }
   </style>
 </head>
@@ -673,15 +629,15 @@
           <img src="https://i.ibb.co/99PVMjbG/Captura-de-tela-2026-02-21-105215.png" alt="Elias" class="foto-perfil">
         </div>
         <div class="brand-text">
-          <h1>Ficha de Treino</h1>
-          <div class="student-info" id="student-info">
-            <!-- Será preenchido pelo JavaScript -->
+          <h1>Elias Galliano</h1>
+          <div class="student-info" id="student-info-mobile">
+            <!-- Info via JS -->
           </div>
         </div>
       </div>
-      <div class="badge date-badge" id="current-date-badge">
+      <div class="date-badge" id="current-date-badge">
         <i class="fas fa-calendar-day"></i>
-        <span>Carregando...</span>
+        <span>...</span>
       </div>
     </div>
   </header>
@@ -690,29 +646,32 @@
     <main>
       <div class="card">
         <div class="card-header">
-          <h2><i class="fas fa-dumbbell"></i> Programas de Treino</h2>
+          <h2><i class="fas fa-dumbbell"></i> Treinos</h2>
+          <span class="badge" style="background:rgba(0,0,0,0.3);padding:0.4rem 0.8rem;border-radius:100px;font-size:0.75rem;">
+            <i class="fas fa-clock"></i> 3x/semana
+          </span>
         </div>
         
         <div class="card-content">
           <div id="ficha-alert" style="display: none;"></div>
           
           <div class="progress-text">
-            <span><i class="fas fa-check-circle" style="color: var(--success);"></i> Progresso do dia</span>
-            <span id="progress-count">0/0 concluídos</span>
+            <span><i class="fas fa-check-circle" style="color: var(--success);"></i> Progresso</span>
+            <span id="progress-count">0/0</span>
           </div>
           <div class="progress-container">
             <div class="progress-bar" id="progress-bar" style="width: 0%;"></div>
           </div>
 
           <div class="tabs">
-            <button class="tab active" id="tabA">SEGUNDA - PEITO</button>
-            <button class="tab" id="tabB">QUARTA - PERNAS</button>
-            <button class="tab" id="tabC">SEXTA - COSTAS</button>
+            <button class="tab active" id="tabA">PEITO</button>
+            <button class="tab" id="tabB">PERNAS</button>
+            <button class="tab" id="tabC">COSTAS</button>
           </div>
 
           <div class="search-box">
             <i class="fas fa-search"></i>
-            <input id="q" type="search" placeholder="Buscar exercício..." />
+            <input id="q" type="search" placeholder="Buscar..." />
           </div>
 
           <div id="list" class="exercise-list"></div>
@@ -723,57 +682,32 @@
     <aside>
       <div class="card">
         <div class="card-header">
-          <h2><i class="fas fa-history"></i> Histórico Permanente</h2>
-          <button class="btn-clear-history" id="clear-history-btn" title="Limpar TODO o histórico">
-            <i class="fas fa-trash"></i> Limpar
+          <h2><i class="fas fa-history"></i> Histórico</h2>
+          <button class="filter-btn" id="clear-history-btn" style="padding:0.3rem 0.6rem;">
+            <i class="fas fa-trash"></i>
           </button>
         </div>
         <div class="card-content">
-          <div class="stats-card">
-            <div>Total de treinos</div>
-            <div class="stats-number" id="total-records">0</div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;">
+            <span style="color:var(--text-secondary);">Total:</span>
+            <span class="stats-number" id="total-records">0</span>
           </div>
           
           <div class="history-filters">
             <button class="filter-btn active" data-filter="all">Todos</button>
             <button class="filter-btn" data-filter="today">Hoje</button>
-            <button class="filter-btn" data-filter="week">Esta semana</button>
-            <button class="filter-btn" data-filter="month">Este mês</button>
+            <button class="filter-btn" data-filter="week">Semana</button>
+            <button class="filter-btn" data-filter="month">Mês</button>
           </div>
           
-          <div id="history-list" style="max-height: 400px; overflow-y: auto;">
-            <div style="color: var(--text-secondary); text-align: center; padding: 2rem;">
-              <i class="fas fa-info-circle"></i>
-              <p>Marque exercícios para ver o histórico</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <div class="card" style="margin-top: 1.5rem;">
-        <div class="card-header">
-          <h2><i class="fas fa-info-circle"></i> Informações</h2>
-        </div>
-        <div class="card-content">
-          <p style="color: var(--text-secondary);">
-            <i class="fas fa-check-circle" style="color: var(--success);"></i>
-            Marque os exercícios como concluídos
-          </p>
-          <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
-            <i class="fas fa-clock" style="color: var(--accent);"></i>
-            Horário de conclusão fica registrado para SEMPRE
-          </p>
-          <p style="color: var(--text-secondary); margin-top: 1rem; font-size: 0.9rem;">
-            <i class="fas fa-history" style="color: var(--accent);"></i>
-            Histórico permanente com filtros por data
-          </p>
+          <div id="history-list" style="max-height: 300px; overflow-y: auto;"></div>
         </div>
       </div>
     </aside>
   </div>
 
   <footer>
-    <i class="fas fa-mobile-alt" style="color: var(--accent);"></i> 31 exercícios • Histórico permanente
+    <i class="fas fa-dumbbell" style="color:var(--accent);"></i> 31 exercícios • Histórico permanente
   </footer>
 
   <script>
@@ -790,22 +724,21 @@
     const clearHistoryBtn = document.getElementById("clear-history-btn");
     const totalRecords = document.getElementById("total-records");
     const filterBtns = document.querySelectorAll('.filter-btn');
-    const studentInfo = document.getElementById("student-info");
+    const studentInfoMobile = document.getElementById("student-info-mobile");
     const fichaAlert = document.getElementById("ficha-alert");
 
     let current = "A";
     let currentFilter = 'all';
     
-    // ===== DADOS DO ALUNO =====
+    // Dados do aluno
     const ALUNO = {
       nome: "Elias Galliano",
-      nascimento: "1974-03-13", // Formato AAAA-MM-DD
-      dataInicio: "2026-02-21", // Data que começou essa ficha
-      dataTrocaFicha: "2026-03-21", // Data para trocar de ficha (1 mês depois)
+      nascimento: "1974-03-13",
+      dataInicio: "2026-02-21",
+      dataTrocaFicha: "2026-03-21",
       professor: "Larissa"
     };
 
-    // ===== FUNÇÕES DE DATA CORRIGIDAS =====
     function formatDateBr(dateStr) {
       if (!dateStr) return '';
       const [year, month, day] = dateStr.split('-');
@@ -819,9 +752,7 @@
       const hoje = new Date();
       let idade = hoje.getFullYear() - nasc.getFullYear();
       const mesDiff = hoje.getMonth() - nasc.getMonth();
-      if (mesDiff < 0 || (mesDiff === 0 && hoje.getDate() < nasc.getDate())) {
-        idade--;
-      }
+      if (mesDiff < 0 || (mesDiff === 0 && hoje.getDate() < nasc.getDate())) idade--;
       return idade;
     }
 
@@ -831,8 +762,7 @@
       const [ano, mes, dia] = dataTroca.split('-');
       const troca = new Date(ano, mes - 1, dia);
       const diffTime = troca - hoje;
-      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-      return diffDays;
+      return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     }
 
     function renderStudentInfo() {
@@ -846,60 +776,28 @@
       if (diasParaTroca <= 0) {
         alertClass = 'danger';
         alertIcon = 'fa-exclamation-triangle';
-        alertText = '⚠️ FICHA VENCIDA! Trocar hoje!';
-        
+        alertText = 'VENCIDA!';
         fichaAlert.style.display = 'block';
-        fichaAlert.innerHTML = `
-          <div class="alert-banner">
-            <i class="fas fa-exclamation-triangle"></i>
-            ⚠️ ATENÇÃO: Data de troca de ficha VENCIDA! Procure a professora Larissa urgente! ⚠️
-            <i class="fas fa-exclamation-triangle"></i>
-          </div>
-        `;
+        fichaAlert.innerHTML = `<div class="alert-banner"><i class="fas fa-exclamation-triangle"></i> FICHA VENCIDA! ⚠️</div>`;
       } else if (diasParaTroca <= 7) {
         alertClass = 'warning';
         alertIcon = 'fa-clock';
-        alertText = `⚠️ Faltam ${diasParaTroca} dias para trocar a ficha!`;
-        
+        alertText = `Faltam ${diasParaTroca}`;
         fichaAlert.style.display = 'block';
-        fichaAlert.innerHTML = `
-          <div class="alert-banner">
-            <i class="fas fa-clock"></i>
-            ⏰ Faltam ${diasParaTroca} dias para trocar de ficha! ⏰
-            <i class="fas fa-clock"></i>
-          </div>
-        `;
+        fichaAlert.innerHTML = `<div class="alert-banner"><i class="fas fa-clock"></i> Faltam ${diasParaTroca} dias ⏰</div>`;
       } else {
         fichaAlert.style.display = 'none';
       }
       
-      studentInfo.innerHTML = `
-        <div class="info-item">
-          <i class="fas fa-user"></i>
-          <span>${ALUNO.nome}</span>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-birthday-cake"></i>
-          <span>${formatDateBr(ALUNO.nascimento)} (${idade} anos)</span>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-calendar-plus"></i>
-          <span>Início: <strong>${formatDateBr(ALUNO.dataInicio)}</strong></span>
-        </div>
-        <div class="info-item ${alertClass}">
-          <i class="fas ${alertIcon}"></i>
-          <span>Troca ficha: <strong>${formatDateBr(ALUNO.dataTrocaFicha)}</strong> ${alertText}</span>
-        </div>
-        <div class="info-item">
-          <i class="fas fa-chalkboard-teacher"></i>
-          <span>Prof.: <strong>${ALUNO.professor}</strong></span>
-        </div>
+      studentInfoMobile.innerHTML = `
+        <span class="info-item"><i class="fas fa-birthday-cake"></i> ${formatDateBr(ALUNO.nascimento)} (${idade})</span>
+        <span class="info-item"><i class="fas fa-calendar-plus"></i> Início: ${formatDateBr(ALUNO.dataInicio)}</span>
+        <span class="info-item ${alertClass}"><i class="fas ${alertIcon}"></i> Troca: ${formatDateBr(ALUNO.dataTrocaFicha)} ${alertText}</span>
+        <span class="info-item"><i class="fas fa-chalkboard-teacher"></i> ${ALUNO.professor}</span>
       `;
     }
 
-    // ===== LINKS REAIS DO YOUTUBE =====
     const YOUTUBE_LINKS = {
-      // SEGUNDA - PEITO
       "Mobilidade de Ombro": "https://www.youtube.com/watch?v=TPXZUEr6QVU",
       "Mobilidade do Manguito Rotador": "https://www.youtube.com/watch?v=4XiTDeXQy4g",
       "Alongamento de Peitoral": "https://youtube.com/shorts/FwvrxUNwyIY",
@@ -911,8 +809,6 @@
       "Desenvolvimento Arnold": "https://www.youtube.com/watch?v=IIdj90AJArU",
       "Tríceps Cruzado": "https://www.youtube.com/watch?v=2vYMlIZtVC0",
       "Tríceps na Corda": "https://www.youtube.com/watch?v=KhK5HWJfsrQ",
-      
-      // QUARTA - PERNAS
       "Alongamento de Quadríceps": "https://youtu.be/yFvf_tdVook",
       "Alongamento Posterior": "https://www.instagram.com/reels/DLnth66xXqF/",
       "Mobilidade de Tornozelo": "https://youtu.be/b1rVunzAzgE",
@@ -925,8 +821,6 @@
       "Cadeira Adutora": "https://www.youtube.com/watch?v=8ITuDovX6Zw",
       "Polia Média": "https://www.tiktok.com/@amorimpro/video/7462927939475197189",
       "Prancha Lateral": "https://www.youtube.com/watch?v=RPr51FgCYbA",
-      
-      // SEXTA - COSTAS
       "Alongamento Dorsal": "https://youtube.com/shorts/DXW-fCGMGx0",
       "Alongamento de Tríceps": "https://youtube.com/shorts/0JdE_6M7ZJ4",
       "Remada baixa unilateral": "https://youtube.com/shorts/LpQMEygJfNY",
@@ -939,172 +833,134 @@
       "Martelo inclinado": "https://youtube.com/shorts/6GWl-tjj1Bg"
     };
 
-    // Função para extrair ID do YouTube
     function getYoutubeVideoId(url) {
       if (!url) return null;
-      
       const shortsMatch = url.match(/youtube\.com\/shorts\/([a-zA-Z0-9_-]+)/);
       if (shortsMatch) return shortsMatch[1];
-      
       const youtuBeMatch = url.match(/youtu\.be\/([a-zA-Z0-9_-]+)/);
       if (youtuBeMatch) return youtuBeMatch[1];
-      
       const watchMatch = url.match(/[?&]v=([^&]+)/);
       if (watchMatch) return watchMatch[1];
-      
       return null;
     }
 
-    // ===== DATA =====
     function getCurrentDate() {
       const now = new Date();
-      const year = now.getFullYear();
-      const month = String(now.getMonth() + 1).padStart(2, '0');
-      const day = String(now.getDate()).padStart(2, '0');
-      return `${year}-${month}-${day}`;
+      return `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')}`;
     }
     
     function formatDateForDisplay(dateStr) {
       const [year, month, day] = dateStr.split('-');
-      const date = new Date(year, month - 1, day);
-      const dias = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
-      return `${dias[date.getDay()]}, ${day}/${month}`;
+      const date = new Date(year, month-1, day);
+      const dias = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+      return `${dias[date.getDay()].substring(0,3)}, ${day}/${month}`;
     }
 
     function getCurrentDateTime() {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const seconds = String(now.getSeconds()).padStart(2, '0');
-      return `${hours}:${minutes}:${seconds}`;
+      return `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
     }
     
-    // Data atual
     const today = getCurrentDate();
     currentDateBadge.innerHTML = `<i class="fas fa-calendar-day"></i> <span>${formatDateForDisplay(today)}</span>`;
-    
-    // Renderizar informações do aluno
     renderStudentInfo();
     
-    // Estado dos exercícios e histórico PERMANENTE
+    const lastVisit = localStorage.getItem('elias_lastVisitDate');
+    if (lastVisit !== today) {
+      localStorage.removeItem('elias_completedExercises');
+      localStorage.setItem('elias_lastVisitDate', today);
+    }
+    
     let completedExercises = JSON.parse(localStorage.getItem('elias_completedExercises')) || {};
     let permanentHistory = JSON.parse(localStorage.getItem('elias_permanentHistory')) || [];
 
-    // Dados dos exercícios
     const DATA = {
-      A: {
-        items: [
-          { n:"AQ1", name:"Mobilidade de Ombro", sets:"1", reps:"15", load:"-", tipo:"youtube" },
-          { n:"AQ2", name:"Mobilidade do Manguito Rotador", sets:"1", reps:"15", load:"-", tipo:"youtube" },
-          { n:"AQ3", name:"Alongamento de Peitoral", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
-          { n:1, name:"Supino Reto", sets:"3", reps:"6", load:"14kg", tipo:"youtube" },
-          { n:2, name:"Voador Frontal", sets:"3", reps:"6", load:"6PL", tipo:"youtube" },
-          { n:3, name:"Supino Inclinado", sets:"3", reps:"6", load:"15kg", tipo:"youtube" },
-          { n:4, name:"Crucifixo Inclinado", sets:"3", reps:"12", load:"6kg", tipo:"youtube" },
-          { n:5, name:"Elevação Frontal", sets:"3", reps:"6", load:"6kg", tipo:"youtube" },
-          { n:6, name:"Desenvolvimento Arnold", sets:"3", reps:"10", load:"6kg", tipo:"youtube" },
-          { n:7, name:"Tríceps Cruzado", sets:"3", reps:"10", load:"2PL", tipo:"youtube" },
-          { n:8, name:"Tríceps na Corda", sets:"3", reps:"10", load:"5PL", tipo:"youtube" }
-        ]
-      },
-      B: {
-        items: [
-          { n:"AQ1", name:"Alongamento de Quadríceps", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
-          { n:"AQ2", name:"Alongamento Posterior", sets:"1", reps:'15"', load:"-", tipo:"instagram" },
-          { n:"AQ3", name:"Mobilidade de Tornozelo", sets:"2", reps:"15", load:"-", tipo:"youtube" },
-          { n:1, name:"Agachamento Sumô", sets:"3", reps:"10+10", load:"22+20kg", tipo:"youtube" },
-          { n:2, name:"Leg Press Unilateral", sets:"3", reps:"12", load:"3PL", tipo:"youtube" },
-          { n:3, name:"Mesa Flexora", sets:"3", reps:"10+10", load:"7+6", tipo:"youtube" },
-          { n:4, name:"Cadeira Extensora", sets:"3", reps:'10"', load:"7PL", tipo:"youtube" },
-          { n:5, name:"Agachamento no Cross", sets:"3", reps:"10+10", load:"8PL", tipo:"youtube" },
-          { n:6, name:"Cadeira Abdutora", sets:"3", reps:"20", load:"11PL", tipo:"youtube" },
-          { n:7, name:"Cadeira Adutora", sets:"3", reps:"20", load:"11PL", tipo:"youtube" },
-          { n:8, name:"Polia Média", sets:"3", reps:'10"', load:"3PL", tipo:"tiktok" },
-          { n:9, name:"Prancha Lateral", sets:"3", reps:'15"', load:"-", tipo:"youtube" }
-        ]
-      },
-      C: {
-        items: [
-          { n:"AQ1", name:"Alongamento Dorsal", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
-          { n:"AQ2", name:"Alongamento de Tríceps", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
-          { n:"AQ3", name:"Alongamento de Peitoral", sets:"1", reps:'15"', load:"-", videoUrl: "https://youtube.com/shorts/FwvrxUNwyIY", tipo:"youtube" },
-          { n:1, name:"Remada baixa unilateral", sets:"3", reps:"10", load:"4 PL", observacao:"✓", tipo:"youtube" },
-          { n:2, name:"Remada baixa triângulo", sets:"3", reps:'10"', load:"7 PL", tipo:"youtube" },
-          { n:3, name:"Pulley supinado", sets:"3", reps:"10", load:"7 PL", tipo:"youtube" },
-          { n:4, name:"Remada alta barra", sets:"3", reps:"10", load:"18kg", tipo:"youtube" },
-          { n:5, name:"Bíceps com Desenvolvimento", sets:"3", reps:"10", load:"18kg", observacao:"Barra pronta", tipo:"youtube" },
-          { n:6, name:"Elevação lateral sentado", sets:"3", reps:"10+10", load:"5+4kg", tipo:"youtube" },
-          { n:7, name:"Encolhimento", sets:"3", reps:"15", load:"18kg", tipo:"youtube" },
-          { n:8, name:"Martelo inclinado", sets:"3", reps:"10", load:"7kg", tipo:"youtube" }
-        ]
-      }
+      A: { items: [
+        { n:"AQ1", name:"Mobilidade de Ombro", sets:"1", reps:"15", load:"-", tipo:"youtube" },
+        { n:"AQ2", name:"Mobilidade do Manguito Rotador", sets:"1", reps:"15", load:"-", tipo:"youtube" },
+        { n:"AQ3", name:"Alongamento de Peitoral", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
+        { n:1, name:"Supino Reto", sets:"3", reps:"6", load:"14kg", tipo:"youtube" },
+        { n:2, name:"Voador Frontal", sets:"3", reps:"6", load:"6PL", tipo:"youtube" },
+        { n:3, name:"Supino Inclinado", sets:"3", reps:"6", load:"15kg", tipo:"youtube" },
+        { n:4, name:"Crucifixo Inclinado", sets:"3", reps:"12", load:"6kg", tipo:"youtube" },
+        { n:5, name:"Elevação Frontal", sets:"3", reps:"6", load:"6kg", tipo:"youtube" },
+        { n:6, name:"Desenvolvimento Arnold", sets:"3", reps:"10", load:"6kg", tipo:"youtube" },
+        { n:7, name:"Tríceps Cruzado", sets:"3", reps:"10", load:"2PL", tipo:"youtube" },
+        { n:8, name:"Tríceps na Corda", sets:"3", reps:"10", load:"5PL", tipo:"youtube" }
+      ]},
+      B: { items: [
+        { n:"AQ1", name:"Alongamento de Quadríceps", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
+        { n:"AQ2", name:"Alongamento Posterior", sets:"1", reps:'15"', load:"-", tipo:"instagram" },
+        { n:"AQ3", name:"Mobilidade de Tornozelo", sets:"2", reps:"15", load:"-", tipo:"youtube" },
+        { n:1, name:"Agachamento Sumô", sets:"3", reps:"10+10", load:"22+20kg", tipo:"youtube" },
+        { n:2, name:"Leg Press Unilateral", sets:"3", reps:"12", load:"3PL", tipo:"youtube" },
+        { n:3, name:"Mesa Flexora", sets:"3", reps:"10+10", load:"7+6", tipo:"youtube" },
+        { n:4, name:"Cadeira Extensora", sets:"3", reps:'10"', load:"7PL", tipo:"youtube" },
+        { n:5, name:"Agachamento no Cross", sets:"3", reps:"10+10", load:"8PL", tipo:"youtube" },
+        { n:6, name:"Cadeira Abdutora", sets:"3", reps:"20", load:"11PL", tipo:"youtube" },
+        { n:7, name:"Cadeira Adutora", sets:"3", reps:"20", load:"11PL", tipo:"youtube" },
+        { n:8, name:"Polia Média", sets:"3", reps:'10"', load:"3PL", tipo:"tiktok" },
+        { n:9, name:"Prancha Lateral", sets:"3", reps:'15"', load:"-", tipo:"youtube" }
+      ]},
+      C: { items: [
+        { n:"AQ1", name:"Alongamento Dorsal", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
+        { n:"AQ2", name:"Alongamento de Tríceps", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
+        { n:"AQ3", name:"Alongamento de Peitoral", sets:"1", reps:'15"', load:"-", tipo:"youtube" },
+        { n:1, name:"Remada baixa unilateral", sets:"3", reps:"10", load:"4 PL", observacao:"✓", tipo:"youtube" },
+        { n:2, name:"Remada baixa triângulo", sets:"3", reps:'10"', load:"7 PL", tipo:"youtube" },
+        { n:3, name:"Pulley supinado", sets:"3", reps:"10", load:"7 PL", tipo:"youtube" },
+        { n:4, name:"Remada alta barra", sets:"3", reps:"10", load:"18kg", tipo:"youtube" },
+        { n:5, name:"Bíceps com Desenvolvimento", sets:"3", reps:"10", load:"18kg", observacao:"Barra pronta", tipo:"youtube" },
+        { n:6, name:"Elevação lateral sentado", sets:"3", reps:"10+10", load:"5+4kg", tipo:"youtube" },
+        { n:7, name:"Encolhimento", sets:"3", reps:"15", load:"18kg", tipo:"youtube" },
+        { n:8, name:"Martelo inclinado", sets:"3", reps:"10", load:"7kg", tipo:"youtube" }
+      ]}
     };
 
-    function getExerciseKey(program, exercise) {
-      return `${program}-${exercise.n}`;
-    }
+    function getExerciseKey(program, exercise) { return `${program}-${exercise.n}`; }
 
-    // Funções de data para filtros
     function isSameWeek(date1, date2) {
-      const d1 = new Date(date1);
-      const d2 = new Date(date2);
-      
-      const d1Week = Math.floor((d1 - new Date(d1.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
-      const d2Week = Math.floor((d2 - new Date(d2.getFullYear(), 0, 1)) / (7 * 24 * 60 * 60 * 1000));
-      
+      const d1 = new Date(date1), d2 = new Date(date2);
+      const d1Week = Math.floor((d1 - new Date(d1.getFullYear(),0,1)) / (7*24*60*60*1000));
+      const d2Week = Math.floor((d2 - new Date(d2.getFullYear(),0,1)) / (7*24*60*60*1000));
       return d1Week === d2Week && d1.getFullYear() === d2.getFullYear();
     }
 
     function isSameMonth(date1, date2) {
-      const d1 = new Date(date1);
-      const d2 = new Date(date2);
+      const d1 = new Date(date1), d2 = new Date(date2);
       return d1.getMonth() === d2.getMonth() && d1.getFullYear() === d2.getFullYear();
     }
 
     function filterHistoryByDate(entries, filter) {
       const todayStr = getCurrentDate();
-      
       return entries.filter(entry => {
         switch(filter) {
-          case 'today':
-            return entry.date === todayStr;
-          case 'week':
-            return isSameWeek(entry.date, todayStr);
-          case 'month':
-            return isSameMonth(entry.date, todayStr);
-          default:
-            return true;
+          case 'today': return entry.date === todayStr;
+          case 'week': return isSameWeek(entry.date, todayStr);
+          case 'month': return isSameMonth(entry.date, todayStr);
+          default: return true;
         }
       });
     }
 
     function addToHistory(exercise, program) {
-      const timestamp = getCurrentDateTime();
-      const historyEntry = {
+      permanentHistory.unshift({
         id: Date.now() + Math.random(),
         program: program,
         programName: program === 'A' ? 'PEITO' : program === 'B' ? 'PERNAS' : 'COSTAS',
         exerciseNumber: exercise.n,
         exerciseName: exercise.name,
-        time: timestamp,
-        date: today,
-        fullDate: new Date().toISOString()
-      };
-      
-      permanentHistory.unshift(historyEntry);
+        time: getCurrentDateTime(),
+        date: today
+      });
       localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
-      
       updateTotalRecords();
       renderHistory(currentFilter);
     }
 
     function removeFromHistory(exercise, program) {
-      permanentHistory = permanentHistory.filter(entry => 
-        !(entry.exerciseNumber === exercise.n && entry.program === program && entry.date === today)
-      );
-      
+      permanentHistory = permanentHistory.filter(e => !(e.exerciseNumber === exercise.n && e.program === program && e.date === today));
       localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
-      
       updateTotalRecords();
       renderHistory(currentFilter);
     }
@@ -1115,53 +971,27 @@
 
     function renderHistory(filter = 'all') {
       currentFilter = filter;
-      
       filterBtns.forEach(btn => {
         btn.classList.remove('active');
-        if (btn.dataset.filter === filter) {
-          btn.classList.add('active');
-        }
+        if (btn.dataset.filter === filter) btn.classList.add('active');
       });
       
-      const filteredHistory = filterHistoryByDate(permanentHistory, filter);
-      
-      if (filteredHistory.length === 0) {
-        historyList.innerHTML = `
-          <div style="color: var(--text-secondary); text-align: center; padding: 2rem;">
-            <i class="fas fa-info-circle"></i>
-            <p>Nenhum registro encontrado</p>
-          </div>
-        `;
+      const filtered = filterHistoryByDate(permanentHistory, filter);
+      if (filtered.length === 0) {
+        historyList.innerHTML = '<div style="color:var(--text-secondary);text-align:center;padding:1rem;">Nenhum registro</div>';
         return;
       }
       
       let html = '';
-      filteredHistory.forEach(entry => {
-        const [year, month, day] = entry.date.split('-');
-        const displayDate = `${day}/${month}/${year}`;
-        
-        html += `
-          <div class="history-item">
-            <i class="fas fa-check-circle" style="color: var(--success);"></i>
-            <strong>${entry.programName} #${entry.exerciseNumber}</strong> ${entry.exerciseName}
-            <div style="margin-top: 0.3rem;">
-              <span class="history-date">
-                <i class="fas fa-calendar-alt"></i> ${displayDate}
-              </span>
-              <span class="history-timestamp">
-                <i class="fas fa-clock"></i> ${entry.time}
-              </span>
-            </div>
-          </div>
-        `;
+      filtered.forEach(entry => {
+        const [y,m,d] = entry.date.split('-');
+        html += `<div class="history-item"><i class="fas fa-check-circle" style="color:var(--success);"></i> <strong>${entry.programName} #${entry.exerciseNumber}</strong> ${entry.exerciseName}<div><span class="history-date"><i class="fas fa-calendar-alt"></i> ${d}/${m}/${y}</span> <span style="color:var(--success);font-size:0.7rem;"><i class="fas fa-clock"></i> ${entry.time}</span></div></div>`;
       });
-      
       historyList.innerHTML = html;
     }
 
     function toggleComplete(program, exercise, button) {
       const key = getExerciseKey(program, exercise);
-      
       if (completedExercises[key]) {
         delete completedExercises[key];
         button.classList.remove('completed');
@@ -1173,149 +1003,90 @@
         button.innerHTML = '<i class="fas fa-check"></i>';
         addToHistory(exercise, program);
       }
-      
       localStorage.setItem('elias_completedExercises', JSON.stringify(completedExercises));
-      
-      const exerciseItem = button.closest('.exercise-item');
-      if (completedExercises[key]) {
-        exerciseItem.classList.add('completed');
-      } else {
-        exerciseItem.classList.remove('completed');
-      }
-      
+      button.closest('.exercise-item').classList.toggle('completed');
       updateProgress();
     }
 
     function updateProgress() {
       const items = DATA[current].items;
       const total = items.length;
-      
       let completed = 0;
-      items.forEach(item => {
-        if (completedExercises[getExerciseKey(current, item)]) completed++;
-      });
-      
-      progressCount.textContent = `${completed}/${total} concluídos`;
+      items.forEach(item => { if (completedExercises[getExerciseKey(current, item)]) completed++; });
+      progressCount.textContent = `${completed}/${total}`;
       progressBar.style.width = total > 0 ? `${(completed/total)*100}%` : '0%';
     }
 
     function clearAllHistory() {
-      if (confirm('⚠️ ATENÇÃO: Isso vai apagar TODO o histórico permanente! Tem certeza?')) {
+      if (confirm('Apagar todo histórico?')) {
         completedExercises = {};
         permanentHistory = [];
-        localStorage.setItem('elias_completedExercises', JSON.stringify(completedExercises));
-        localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
-        render();
-        updateTotalRecords();
-        renderHistory(currentFilter);
-        updateProgress();
+        localStorage.setItem('elias_completedExercises', '{}');
+        localStorage.setItem('elias_permanentHistory', '[]');
+        render(); updateTotalRecords(); renderHistory(currentFilter);
       }
     }
 
     function render() {
       const query = q.value.toLowerCase().trim();
       list.innerHTML = "";
-
-      const items = DATA[current].items.filter(item => 
-        !query || item.name.toLowerCase().includes(query)
-      );
+      const items = DATA[current].items.filter(i => !query || i.name.toLowerCase().includes(query));
 
       items.forEach(item => {
-        const key = getExerciseKey(current, item);
-        const isCompleted = completedExercises[key];
+        const isCompleted = completedExercises[getExerciseKey(current, item)];
         const videoUrl = YOUTUBE_LINKS[item.name] || "#";
         const videoId = getYoutubeVideoId(videoUrl);
         const thumbUrl = videoId ? `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg` : null;
-        
-        // Encontrar entrada do histórico para hoje
-        const todayEntry = permanentHistory.find(entry => 
-          entry.exerciseNumber === item.n && 
-          entry.program === current && 
-          entry.date === today
-        );
-        
-        const div = document.createElement('div');
-        div.className = `exercise-item ${isCompleted ? 'completed' : ''}`;
-        
+        const todayEntry = permanentHistory.find(e => e.exerciseNumber === item.n && e.program === current && e.date === today);
         const observacao = item.observacao ? ` <span style="color:var(--accent)">(${item.observacao})</span>` : '';
         
-        let btnClass = 'btn-primary';
-        let btnIcon = 'fab fa-youtube';
-        let btnText = 'Assistir no YouTube';
+        let btnClass = 'btn-primary', btnIcon = 'fab fa-youtube', btnText = 'Assistir';
+        if (item.tipo === 'instagram') { btnClass = 'btn-instagram'; btnIcon = 'fab fa-instagram'; btnText = 'Instagram'; }
+        else if (item.tipo === 'tiktok') { btnClass = 'btn-tiktok'; btnIcon = 'fab fa-tiktok'; btnText = 'TikTok'; }
         
-        if (item.tipo === 'instagram') {
-          btnClass = 'btn-instagram';
-          btnIcon = 'fab fa-instagram';
-          btnText = 'Ver no Instagram';
-        } else if (item.tipo === 'tiktok') {
-          btnClass = 'btn-tiktok';
-          btnIcon = 'fab fa-tiktok';
-          btnText = 'Ver no TikTok';
-        }
-        
-        div.innerHTML = `
-          <button class="exercise-header">
-            <div class="exercise-info">
-              <div class="exercise-number">${item.n}</div>
-              <div>
-                <div class="exercise-name">${item.name}${observacao}</div>
-                <div class="exercise-meta">
-                  <span><i class="fas fa-layer-group"></i> ${item.sets}</span>
-                  <span><i class="fas fa-repeat"></i> ${item.reps}</span>
-                  <span><i class="fas fa-weight-hanging"></i> ${item.load}</span>
-                </div>
-                ${todayEntry ? `
-                  <div class="exercise-timestamp">
-                    <i class="fas fa-clock"></i> Hoje às ${todayEntry.time}
+        list.innerHTML += `
+          <div class="exercise-item ${isCompleted ? 'completed' : ''}">
+            <button class="exercise-header">
+              <div class="exercise-info">
+                <div class="exercise-number">${item.n}</div>
+                <div>
+                  <div class="exercise-name">${item.name}${observacao}</div>
+                  <div class="exercise-meta">
+                    <span><i class="fas fa-layer-group"></i> ${item.sets}</span>
+                    <span><i class="fas fa-repeat"></i> ${item.reps}</span>
+                    <span><i class="fas fa-weight-hanging"></i> ${item.load}</span>
                   </div>
-                ` : ''}
+                  ${todayEntry ? `<div class="exercise-timestamp"><i class="fas fa-clock"></i> ${todayEntry.time}</div>` : ''}
+                </div>
               </div>
-            </div>
-            <div class="exercise-actions">
-              <div class="btn-complete ${isCompleted ? 'completed' : ''}">
-                ${isCompleted ? '<i class="fas fa-check"></i>' : '<i class="fas fa-circle"></i>'}
+              <div class="exercise-actions">
+                <div class="btn-complete ${isCompleted ? 'completed' : ''}">${isCompleted ? '<i class="fas fa-check"></i>' : '<i class="fas fa-circle"></i>'}</div>
+                <div class="chevron"><i class="fas fa-chevron-down"></i></div>
               </div>
-              <div class="chevron"><i class="fas fa-chevron-down"></i></div>
-            </div>
-          </button>
-          <div class="exercise-panel">
-            <div class="media-container">
-              ${thumbUrl ? 
-                `<img src="${thumbUrl}" alt="${item.name}" loading="lazy">` : 
-                `<div class="thumbnail-fallback">
-                  <i class="fab fa-youtube thumbnail-icon" style="color: white;"></i>
-                  <span class="thumbnail-text">${item.name}</span>
-                </div>`
-              }
-            </div>
-            <div class="action-buttons">
-              <a href="${videoUrl}" class="btn ${btnClass}" target="_blank" rel="noopener">
-                <i class="${btnIcon}"></i> ${btnText}
-              </a>
+            </button>
+            <div class="exercise-panel">
+              <div class="media-container">${thumbUrl ? `<img src="${thumbUrl}" loading="lazy">` : '<div class="thumbnail-fallback"><i class="fab fa-youtube" style="font-size:3rem;"></i></div>'}</div>
+              <div class="action-buttons"><a href="${videoUrl}" class="btn ${btnClass}" target="_blank"><i class="${btnIcon}"></i> ${btnText}</a></div>
             </div>
           </div>
         `;
-        
-        const header = div.querySelector('.exercise-header');
-        const completeBtn = div.querySelector('.btn-complete');
-        
-        header.addEventListener('click', (e) => {
-          e.preventDefault();
-          div.classList.toggle('open');
-        });
-        
-        completeBtn.addEventListener('click', (e) => {
-          e.stopPropagation();
-          toggleComplete(current, item, completeBtn);
-        });
-        
-        list.appendChild(div);
       });
 
-      if (items.length === 0) {
-        list.innerHTML = '<div class="empty-state"><i class="fas fa-search"></i><p>Nenhum exercício encontrado</p></div>';
-      }
-      
+      document.querySelectorAll('.exercise-header').forEach(header => {
+        header.addEventListener('click', (e) => {
+          e.preventDefault();
+          header.closest('.exercise-item').classList.toggle('open');
+        });
+      });
+
+      document.querySelectorAll('.btn-complete').forEach((btn, idx) => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          toggleComplete(current, items[idx], btn);
+        });
+      });
+
+      if (items.length === 0) list.innerHTML = '<div class="empty-state"><i class="fas fa-search"></i><p>Nenhum exercício</p></div>';
       updateProgress();
     }
 
@@ -1328,20 +1099,13 @@
       render();
     }
 
-    // Event listeners
     tabA.addEventListener('click', () => setTab('A'));
     tabB.addEventListener('click', () => setTab('B'));
     tabC.addEventListener('click', () => setTab('C'));
     q.addEventListener('input', render);
     clearHistoryBtn.addEventListener('click', clearAllHistory);
+    filterBtns.forEach(btn => btn.addEventListener('click', () => renderHistory(btn.dataset.filter)));
     
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        renderHistory(btn.dataset.filter);
-      });
-    });
-    
-    // Render inicial
     render();
     updateTotalRecords();
     renderHistory('all');
