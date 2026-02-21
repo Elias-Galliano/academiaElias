@@ -670,7 +670,7 @@
     <div class="header-content">
       <div class="brand">
         <div class="logo">
-          <img src="https://i.ibb.co/99PVMjbG/Captura-de-tela-2026-02-21-105215.png" alt="Elisa" class="foto-perfil">
+          <img src="https://i.ibb.co/99PVMjbG/Captura-de-tela-2026-02-21-105215.png" alt="Elias" class="foto-perfil">
         </div>
         <div class="brand-text">
           <h1>Ficha de Treino</h1>
@@ -796,9 +796,9 @@
     let current = "A";
     let currentFilter = 'all';
     
-    // ===== DADOS DA ALUNA =====
-    const ALUNA = {
-      nome: "Elisa Galiano",
+    // ===== DADOS DO ALUNO =====
+    const ALUNO = {
+      nome: "Elias Galliano",
       nascimento: "1974-03-13", // Formato AAAA-MM-DD
       dataInicio: "2026-02-21", // Data que começou essa ficha
       dataTrocaFicha: "2026-03-21", // Data para trocar de ficha (1 mês depois)
@@ -836,8 +836,8 @@
     }
 
     function renderStudentInfo() {
-      const idade = calcularIdade(ALUNA.nascimento);
-      const diasParaTroca = calcularDiasParaTrocaFicha(ALUNA.dataTrocaFicha);
+      const idade = calcularIdade(ALUNO.nascimento);
+      const diasParaTroca = calcularDiasParaTrocaFicha(ALUNO.dataTrocaFicha);
       
       let alertClass = '';
       let alertIcon = 'fa-calendar-check';
@@ -876,23 +876,23 @@
       studentInfo.innerHTML = `
         <div class="info-item">
           <i class="fas fa-user"></i>
-          <span>${ALUNA.nome}</span>
+          <span>${ALUNO.nome}</span>
         </div>
         <div class="info-item">
           <i class="fas fa-birthday-cake"></i>
-          <span>${formatDateBr(ALUNA.nascimento)} (${idade} anos)</span>
+          <span>${formatDateBr(ALUNO.nascimento)} (${idade} anos)</span>
         </div>
         <div class="info-item">
           <i class="fas fa-calendar-plus"></i>
-          <span>Início: <strong>${formatDateBr(ALUNA.dataInicio)}</strong></span>
+          <span>Início: <strong>${formatDateBr(ALUNO.dataInicio)}</strong></span>
         </div>
         <div class="info-item ${alertClass}">
           <i class="fas ${alertIcon}"></i>
-          <span>Troca ficha: <strong>${formatDateBr(ALUNA.dataTrocaFicha)}</strong> ${alertText}</span>
+          <span>Troca ficha: <strong>${formatDateBr(ALUNO.dataTrocaFicha)}</strong> ${alertText}</span>
         </div>
         <div class="info-item">
           <i class="fas fa-chalkboard-teacher"></i>
-          <span>Prof.: <strong>${ALUNA.professor}</strong></span>
+          <span>Prof.: <strong>${ALUNO.professor}</strong></span>
         </div>
       `;
     }
@@ -983,12 +983,12 @@
     const today = getCurrentDate();
     currentDateBadge.innerHTML = `<i class="fas fa-calendar-day"></i> <span>${formatDateForDisplay(today)}</span>`;
     
-    // Renderizar informações da aluna
+    // Renderizar informações do aluno
     renderStudentInfo();
     
     // Estado dos exercícios e histórico PERMANENTE
-    let completedExercises = JSON.parse(localStorage.getItem('elisa_completedExercises')) || {};
-    let permanentHistory = JSON.parse(localStorage.getItem('elisa_permanentHistory')) || [];
+    let completedExercises = JSON.parse(localStorage.getItem('elias_completedExercises')) || {};
+    let permanentHistory = JSON.parse(localStorage.getItem('elias_permanentHistory')) || [];
 
     // Dados dos exercícios
     const DATA = {
@@ -1092,7 +1092,7 @@
       };
       
       permanentHistory.unshift(historyEntry);
-      localStorage.setItem('elisa_permanentHistory', JSON.stringify(permanentHistory));
+      localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
       
       updateTotalRecords();
       renderHistory(currentFilter);
@@ -1103,7 +1103,7 @@
         !(entry.exerciseNumber === exercise.n && entry.program === program && entry.date === today)
       );
       
-      localStorage.setItem('elisa_permanentHistory', JSON.stringify(permanentHistory));
+      localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
       
       updateTotalRecords();
       renderHistory(currentFilter);
@@ -1174,7 +1174,7 @@
         addToHistory(exercise, program);
       }
       
-      localStorage.setItem('elisa_completedExercises', JSON.stringify(completedExercises));
+      localStorage.setItem('elias_completedExercises', JSON.stringify(completedExercises));
       
       const exerciseItem = button.closest('.exercise-item');
       if (completedExercises[key]) {
@@ -1203,8 +1203,8 @@
       if (confirm('⚠️ ATENÇÃO: Isso vai apagar TODO o histórico permanente! Tem certeza?')) {
         completedExercises = {};
         permanentHistory = [];
-        localStorage.setItem('elisa_completedExercises', JSON.stringify(completedExercises));
-        localStorage.setItem('elisa_permanentHistory', JSON.stringify(permanentHistory));
+        localStorage.setItem('elias_completedExercises', JSON.stringify(completedExercises));
+        localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
         render();
         updateTotalRecords();
         renderHistory(currentFilter);
