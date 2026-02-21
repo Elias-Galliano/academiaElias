@@ -25,6 +25,9 @@
       --accent-gradient: linear-gradient(135deg, #ffd700 0%, #ffb347 100%);
       --success: #10b981;
       --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      --warning: #f59e0b;
+      --warning-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      --danger: #ef4444;
       --shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
       --blur: blur(10px);
       --border: 1px solid rgba(255, 255, 255, 0.18);
@@ -59,6 +62,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 2rem;
+      flex-wrap: wrap;
     }
 
     .brand {
@@ -68,32 +72,83 @@
     }
 
     .logo {
-      width: 48px;
-      height: 48px;
-      background: var(--accent-gradient);
+      width: 60px;
+      height: 60px;
       border-radius: var(--radius-sm);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 1.5rem;
-      color: #1a1b3b;
+      overflow: hidden;
+      padding: 0;
+      background: transparent;
+    }
+
+    .foto-perfil {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: var(--radius-sm);
     }
 
     .brand-text h1 {
-      font-size: 1.5rem;
+      font-size: 1.8rem;
       font-weight: 700;
       background: linear-gradient(to right, #fff, var(--accent));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
+      margin-bottom: 0.5rem;
     }
 
-    .brand-text p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
+    .student-info {
       display: flex;
-      gap: 1rem;
       flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .info-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      border: var(--border);
+      font-size: 0.9rem;
+    }
+
+    .info-item i {
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .info-item strong {
+      color: white;
+      margin-left: 0.25rem;
+      font-weight: 600;
+    }
+
+    .info-item.warning {
+      background: rgba(245, 158, 11, 0.2);
+      border-color: var(--warning);
+      animation: pulse 2s infinite;
+    }
+
+    .info-item.warning i {
+      color: var(--warning);
+    }
+
+    .info-item.danger {
+      background: rgba(239, 68, 68, 0.2);
+      border-color: var(--danger);
+      animation: pulse 1s infinite;
+    }
+
+    .info-item.danger i {
+      color: var(--danger);
+    }
+
+    @keyframes pulse {
+      0% { opacity: 1; }
+      50% { opacity: 0.7; }
+      100% { opacity: 1; }
     }
 
     .badge {
@@ -590,19 +645,38 @@
     footer i {
       color: var(--accent);
     }
+
+    .alert-banner {
+      background: var(--warning-gradient);
+      color: #1a1b3b;
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      font-weight: 600;
+      animation: pulse 2s infinite;
+    }
+
+    .alert-banner i {
+      font-size: 1.5rem;
+    }
   </style>
 </head>
 <body>
   <header>
     <div class="header-content">
       <div class="brand">
-        <div class="logo">Elias</div>
+        <div class="logo">
+          <img src="https://i.ibb.co/99PVMjbG/Captura-de-tela-2026-02-21-105215.png" alt="Elisa" class="foto-perfil">
+        </div>
         <div class="brand-text">
           <h1>Ficha de Treino</h1>
-          <p>
-            <span><i class="fas fa-user" style="color: var(--accent);"></i> Larissa</span>
-            <span><i class="fas fa-calendar" style="color: var(--accent);"></i> Início: 11/02/2026</span>
-          </p>
+          <div class="student-info" id="student-info">
+            <!-- Será preenchido pelo JavaScript -->
+          </div>
         </div>
       </div>
       <div class="badge date-badge" id="current-date-badge">
@@ -620,6 +694,8 @@
         </div>
         
         <div class="card-content">
+          <div id="ficha-alert" style="display: none;"></div>
+          
           <div class="progress-text">
             <span><i class="fas fa-check-circle" style="color: var(--success);"></i> Progresso do dia</span>
             <span id="progress-count">0/0 concluídos</span>
@@ -714,10 +790,113 @@
     const clearHistoryBtn = document.getElementById("clear-history-btn");
     const totalRecords = document.getElementById("total-records");
     const filterBtns = document.querySelectorAll('.filter-btn');
+    const studentInfo = document.getElementById("student-info");
+    const fichaAlert = document.getElementById("ficha-alert");
 
     let current = "A";
     let currentFilter = 'all';
     
+    // ===== DADOS DA ALUNA =====
+    const ALUNA = {
+      nome: "Elisa Galiano",
+      nascimento: "1974-03-13", // Formato AAAA-MM-DD
+      dataInicio: "2026-02-21", // Data que começou essa ficha
+      dataTrocaFicha: "2026-03-21", // Data para trocar de ficha (1 mês depois)
+      professor: "Larissa"
+    };
+
+    // ===== FUNÇÕES DE DATA CORRIGIDAS =====
+    function formatDateBr(dateStr) {
+      if (!dateStr) return '';
+      const [year, month, day] = dateStr.split('-');
+      return `${day}/${month}/${year}`;
+    }
+
+    function calcularIdade(dataNascimento) {
+      if (!dataNascimento) return 0;
+      const [ano, mes, dia] = dataNascimento.split('-');
+      const nasc = new Date(ano, mes - 1, dia);
+      const hoje = new Date();
+      let idade = hoje.getFullYear() - nasc.getFullYear();
+      const mesDiff = hoje.getMonth() - nasc.getMonth();
+      if (mesDiff < 0 || (mesDiff === 0 && hoje.getDate() < nasc.getDate())) {
+        idade--;
+      }
+      return idade;
+    }
+
+    function calcularDiasParaTrocaFicha(dataTroca) {
+      if (!dataTroca) return 0;
+      const hoje = new Date();
+      const [ano, mes, dia] = dataTroca.split('-');
+      const troca = new Date(ano, mes - 1, dia);
+      const diffTime = troca - hoje;
+      const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+      return diffDays;
+    }
+
+    function renderStudentInfo() {
+      const idade = calcularIdade(ALUNA.nascimento);
+      const diasParaTroca = calcularDiasParaTrocaFicha(ALUNA.dataTrocaFicha);
+      
+      let alertClass = '';
+      let alertIcon = 'fa-calendar-check';
+      let alertText = '';
+      
+      if (diasParaTroca <= 0) {
+        alertClass = 'danger';
+        alertIcon = 'fa-exclamation-triangle';
+        alertText = '⚠️ FICHA VENCIDA! Trocar hoje!';
+        
+        fichaAlert.style.display = 'block';
+        fichaAlert.innerHTML = `
+          <div class="alert-banner">
+            <i class="fas fa-exclamation-triangle"></i>
+            ⚠️ ATENÇÃO: Data de troca de ficha VENCIDA! Procure a professora Larissa urgente! ⚠️
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
+        `;
+      } else if (diasParaTroca <= 7) {
+        alertClass = 'warning';
+        alertIcon = 'fa-clock';
+        alertText = `⚠️ Faltam ${diasParaTroca} dias para trocar a ficha!`;
+        
+        fichaAlert.style.display = 'block';
+        fichaAlert.innerHTML = `
+          <div class="alert-banner">
+            <i class="fas fa-clock"></i>
+            ⏰ Faltam ${diasParaTroca} dias para trocar de ficha! ⏰
+            <i class="fas fa-clock"></i>
+          </div>
+        `;
+      } else {
+        fichaAlert.style.display = 'none';
+      }
+      
+      studentInfo.innerHTML = `
+        <div class="info-item">
+          <i class="fas fa-user"></i>
+          <span>${ALUNA.nome}</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-birthday-cake"></i>
+          <span>${formatDateBr(ALUNA.nascimento)} (${idade} anos)</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-calendar-plus"></i>
+          <span>Início: <strong>${formatDateBr(ALUNA.dataInicio)}</strong></span>
+        </div>
+        <div class="info-item ${alertClass}">
+          <i class="fas ${alertIcon}"></i>
+          <span>Troca ficha: <strong>${formatDateBr(ALUNA.dataTrocaFicha)}</strong> ${alertText}</span>
+        </div>
+        <div class="info-item">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <span>Prof.: <strong>${ALUNA.professor}</strong></span>
+        </div>
+      `;
+    }
+
     // ===== LINKS REAIS DO YOUTUBE =====
     const YOUTUBE_LINKS = {
       // SEGUNDA - PEITO
@@ -804,9 +983,12 @@
     const today = getCurrentDate();
     currentDateBadge.innerHTML = `<i class="fas fa-calendar-day"></i> <span>${formatDateForDisplay(today)}</span>`;
     
+    // Renderizar informações da aluna
+    renderStudentInfo();
+    
     // Estado dos exercícios e histórico PERMANENTE
-    let completedExercises = JSON.parse(localStorage.getItem('elias_completedExercises')) || {};
-    let permanentHistory = JSON.parse(localStorage.getItem('elias_permanentHistory')) || [];
+    let completedExercises = JSON.parse(localStorage.getItem('elisa_completedExercises')) || {};
+    let permanentHistory = JSON.parse(localStorage.getItem('elisa_permanentHistory')) || [];
 
     // Dados dos exercícios
     const DATA = {
@@ -910,7 +1092,7 @@
       };
       
       permanentHistory.unshift(historyEntry);
-      localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
+      localStorage.setItem('elisa_permanentHistory', JSON.stringify(permanentHistory));
       
       updateTotalRecords();
       renderHistory(currentFilter);
@@ -921,7 +1103,7 @@
         !(entry.exerciseNumber === exercise.n && entry.program === program && entry.date === today)
       );
       
-      localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
+      localStorage.setItem('elisa_permanentHistory', JSON.stringify(permanentHistory));
       
       updateTotalRecords();
       renderHistory(currentFilter);
@@ -992,7 +1174,7 @@
         addToHistory(exercise, program);
       }
       
-      localStorage.setItem('elias_completedExercises', JSON.stringify(completedExercises));
+      localStorage.setItem('elisa_completedExercises', JSON.stringify(completedExercises));
       
       const exerciseItem = button.closest('.exercise-item');
       if (completedExercises[key]) {
@@ -1021,8 +1203,8 @@
       if (confirm('⚠️ ATENÇÃO: Isso vai apagar TODO o histórico permanente! Tem certeza?')) {
         completedExercises = {};
         permanentHistory = [];
-        localStorage.setItem('elias_completedExercises', JSON.stringify(completedExercises));
-        localStorage.setItem('elias_permanentHistory', JSON.stringify(permanentHistory));
+        localStorage.setItem('elisa_completedExercises', JSON.stringify(completedExercises));
+        localStorage.setItem('elisa_permanentHistory', JSON.stringify(permanentHistory));
         render();
         updateTotalRecords();
         renderHistory(currentFilter);
